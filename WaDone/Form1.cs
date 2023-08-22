@@ -49,6 +49,14 @@ namespace WaDone
         private int GoldCount = 0;
         private int WaterCount = 0;
 
+        // 剩餘五屬直線數量
+        private int WoodStrageCount = 0;
+
+        private int FireStrageCount = 0;
+        private int DustStrageCount = 0;
+        private int GoldStrageCount = 0;
+        private int WaterStrageCount = 0;
+
         // 剩餘五屬轉彎數量
         private int WoodTransCount = 0;
 
@@ -105,7 +113,7 @@ namespace WaDone
         {
             path++;
             EProperity start = (EProperity)startPro;
-            if (path < PathCount + 1 && ResultTable.Rows.Count ==0)
+            if (path < PathCount + 1 && ResultTable.Rows.Count == 0)
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -384,6 +392,12 @@ namespace WaDone
             GoldTransCount = int.Parse(Tb_Gold_Trans_Count.Text);
             WaterTransCount = int.Parse(Tb_Water_Trans_Count.Text);
 
+            WoodStrageCount = WoodCount - WoodTransCount;
+            FireStrageCount = FireCount - FireTransCount;
+            DustStrageCount = DustCount - DustTransCount;
+            GoldStrageCount = GoldCount - GoldTransCount;
+            WaterStrageCount = WaterCount - WaterTransCount;
+
             //路徑數量
             PathCount = int.Parse(Tb_Path_Count.Text);
             MiddlePath = int.Parse(Tb_Middle_Path.Text);
@@ -430,7 +444,7 @@ namespace WaDone
         private void GetTotalCount() => ToTalCount.Text = $"總共:{ResultTable.Rows.Count}個";
 
         private void GetStartEnd()
-        { 
+        {
             ERotate startRotate = (Start1_X - Start_X == 0) ? ERotate.直 : ERotate.橫;
             ERotate endRotate = (End1_X - End_X == 0) ? ERotate.直 : ERotate.橫;
 
@@ -446,7 +460,6 @@ namespace WaDone
             Maze[End_X, End_Y] = 1;
             // 設定起始走點
             SolveMaze(Start1_X, Start1_Y, startRotate, new List<int>(), new List<int>());
-        
         }
 
         /// <summary>
@@ -513,50 +526,103 @@ namespace WaDone
 
         private void CheckAnswer(List<EProperity> source)
         {
+            var totalNeed = source.Skip(1).GroupBy(x => x).Select(prop => new { properity = prop.Key, count = prop.Count() }).ToList();
+
             foreach ((List<int> path, List<int> trans) item in Result)
             {
-                var transDetail = item.trans.Select(data => source[data]).GroupBy(data => data).Select(data => new
-                {
-                    properity = data.Key,
-                    count = data.Count(),
-                }).ToList();
+                Dictionary<int, int> transToIndex = item.path.Select((data, i) => new { value = data, index = i }).ToDictionary(x => x.value - 1, y => y.index + 1);
+
+                var transDetail = item.trans.Select(data => source[transToIndex[data]]).GroupBy(data => data).ToDictionary(
+                    properity => properity.Key,
+                    count => count.Count()
+                );
 
                 bool isAnswer = true;
-                foreach (var perTransDetail in transDetail)
+                foreach (var perNeed in totalNeed)
                 {
                     bool tempAnswer = true;
-                    switch (perTransDetail.properity)
+                    switch (perNeed.properity)
                     {
                         case EProperity.木:
-                            if (perTransDetail.count > WoodTransCount)
+                            // 轉彎判斷
+                            if (transDetail.TryGetValue(perNeed.properity, out int woodTransCount))
+                            {
+                                if (woodTransCount > WoodTransCount)
+                                {
+                                    tempAnswer = false;
+                                }
+                            }
+
+                            // 直線判斷
+                            if (WoodStrageCount < (perNeed.count - woodTransCount))
                             {
                                 tempAnswer = false;
                             }
                             break;
 
                         case EProperity.火:
-                            if (perTransDetail.count > FireTransCount)
+                            // 轉彎判斷
+                            if (transDetail.TryGetValue(perNeed.properity, out int fireTransCount))
+                            {
+                                if (fireTransCount > FireTransCount)
+                                {
+                                    tempAnswer = false;
+                                }
+                            }
+
+                            // 直線判斷
+                            if (FireStrageCount < (perNeed.count - fireTransCount))
                             {
                                 tempAnswer = false;
                             }
                             break;
 
                         case EProperity.土:
-                            if (perTransDetail.count > DustTransCount)
+                            // 轉彎判斷
+                            if (transDetail.TryGetValue(perNeed.properity, out int dustTransCount))
+                            {
+                                if (dustTransCount > DustTransCount)
+                                {
+                                    tempAnswer = false;
+                                }
+                            }
+
+                            // 直線判斷
+                            if (DustStrageCount < (perNeed.count - dustTransCount))
                             {
                                 tempAnswer = false;
                             }
                             break;
 
                         case EProperity.金:
-                            if (perTransDetail.count > GoldTransCount)
+                            // 轉彎判斷
+                            if (transDetail.TryGetValue(perNeed.properity, out int goldTransCount))
+                            {
+                                if (goldTransCount > DustTransCount)
+                                {
+                                    tempAnswer = false;
+                                }
+                            }
+
+                            // 直線判斷
+                            if (DustStrageCount < (perNeed.count - goldTransCount))
                             {
                                 tempAnswer = false;
                             }
                             break;
 
                         case EProperity.水:
-                            if (perTransDetail.count > WaterTransCount)
+                            // 轉彎判斷
+                            if (transDetail.TryGetValue(perNeed.properity, out int waterTransCount))
+                            {
+                                if (waterTransCount > WaterTransCount)
+                                {
+                                    tempAnswer = false;
+                                }
+                            }
+
+                            // 直線判斷
+                            if (WaterStrageCount < (WaterCount - waterTransCount))
                             {
                                 tempAnswer = false;
                             }
@@ -567,18 +633,21 @@ namespace WaDone
                         isAnswer = false;
                     }
                 }
-
                 if (isAnswer)
                 {
+                   List<int> transValues =  item.trans.Select(x => x + 1).ToList();
                     source.RemoveAt(0);
                     ResultAnswer.Add((source.Skip(1).ToList(), item.path));
-                    ResultTable.Columns.Add("路徑");
                     ResultTable.Columns.Add("屬性");
+                    ResultTable.Columns.Add("路徑");
                     for (int i = 0; i < source.Count; i++)
                     {
                         DataRow row = ResultTable.NewRow();
                         row[0] = source[i].ToString();
-                        row[1] = item.path[i].ToString();
+                        string  v = (transValues.Contains( item.path[i]))?
+                                        ",轉彎":
+                                        string.Empty;
+                        row[1] = $@"{item.path[i]}{v}";
                         ResultTable.Rows.Add(row);
                     }
                     new Action(() => dataGridView1.DataSource = ResultTable)();

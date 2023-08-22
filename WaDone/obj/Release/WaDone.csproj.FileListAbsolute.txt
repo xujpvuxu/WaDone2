@@ -42,3 +42,14 @@ C:\TFS\Other\WaDone2\WaDone\obj\Release\WaDone.csproj.GenerateResource.cache
 C:\TFS\Other\WaDone2\WaDone\obj\Release\WaDone.csproj.CoreCompileInputs.cache
 C:\TFS\Other\WaDone2\WaDone\obj\Release\WaDone.exe
 C:\TFS\Other\WaDone2\WaDone\obj\Release\WaDone.pdb
+D:\TFS\WaDone2\WaDone\bin\Release\WaDone.exe.config
+D:\TFS\WaDone2\WaDone\bin\Release\WaDone.exe
+D:\TFS\WaDone2\WaDone\bin\Release\WaDone.pdb
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.AssemblyReference.cache
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.SuggestedBindingRedirects.cache
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.Cb_Trans_Count.resources
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.Properties.Resources.resources
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.GenerateResource.cache
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.CoreCompileInputs.cache
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.exe
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.pdb
