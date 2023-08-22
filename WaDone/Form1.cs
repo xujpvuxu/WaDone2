@@ -20,6 +20,9 @@ namespace WaDone
             GetTotalCount();
         }
 
+        private List<(List<EProperity>, List<int>)> ResultAnswer = new List<(List<EProperity>, List<int>)>();
+        private List<(List<int>, List<int>)> Result = new List<(List<int>, List<int>)>();
+
         // 起始
         private int StartProperity = 0;
 
@@ -45,6 +48,14 @@ namespace WaDone
         private int DustCount = 0;
         private int GoldCount = 0;
         private int WaterCount = 0;
+
+        // 剩餘五屬轉彎數量
+        private int WoodTransCount = 0;
+
+        private int FireTransCount = 0;
+        private int DustTransCount = 0;
+        private int GoldTransCount = 0;
+        private int WaterTransCount = 0;
 
         // 至少某屬性幾個
         private EProperity Total_Properity;
@@ -78,14 +89,13 @@ namespace WaDone
 
         private int[,] Maze = null;
         private Dictionary<(int, int), int> PathRecord = new Dictionary<(int, int), int>();
-        private List<(List<int>, List<int>)> Result = new List<(List<int>, List<int>)>();
         private ERotate EndRotate = ERotate.橫;
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
             Init();
+            GetStartEnd();
             ResultTable = new DataTable();
-            Enumerable.Range(1, PathCount).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
 
             Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
             GetTotalCount();
@@ -95,7 +105,7 @@ namespace WaDone
         {
             path++;
             EProperity start = (EProperity)startPro;
-            if (path < PathCount + 1 && ResultTable.Rows.Count <= 100)
+            if (path < PathCount + 1 && ResultTable.Rows.Count ==0)
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -349,10 +359,7 @@ namespace WaDone
                     }
                     if (isAdd)
                     {
-                        DataRow row = ResultTable.NewRow();
-                        process.Skip(1).Select((x, i) => new { Index = i, Value = x.ToString() }).ToList().ForEach(x => row[x.Index] = x.Value);
-                        ResultTable.Rows.Add(row);
-                        new Action(() => dataGridView1.DataSource = ResultTable)();
+                        CheckAnswer(process);
                     }
                 }
             }
@@ -369,6 +376,13 @@ namespace WaDone
             DustCount = int.Parse(Tb_Dust_Count.Text);
             GoldCount = int.Parse(Tb_Gold_Count.Text);
             WaterCount = int.Parse(Tb_Water_Count.Text);
+
+            // 五屬性剩餘數量
+            WoodTransCount = int.Parse(Tb_Wood_Trans_Count.Text);
+            FireTransCount = int.Parse(Tb_Fire_Trans_Count.Text);
+            DustTransCount = int.Parse(Tb_Dust_Trans_Count.Text);
+            GoldTransCount = int.Parse(Tb_Gold_Trans_Count.Text);
+            WaterTransCount = int.Parse(Tb_Water_Trans_Count.Text);
 
             //路徑數量
             PathCount = int.Parse(Tb_Path_Count.Text);
@@ -398,13 +412,25 @@ namespace WaDone
             // 能量
             StartEnergy = int.Parse(Tb_Start_Energy.Text);
             EndEnergy = int.Parse(Tb_End_Energy.Text);
+
+            // 終迄2點
+            Start_X = int.Parse(Tb_Start_x.Text);
+            Start_Y = int.Parse(Tb_Start_y.Text);
+            Start1_X = int.Parse(Tb_Start1_x.Text);
+            Start1_Y = int.Parse(Tb_Start1_y.Text);
+
+            End_X = int.Parse(Tb_End_x.Text);
+            End_Y = int.Parse(Tb_End_y.Text);
+            End1_X = int.Parse(Tb_End1_x.Text);
+            End1_Y = int.Parse(Tb_End1_y.Text);
+
+            PathCount = int.Parse(Tb_Path_Count.Text);
         }
 
         private void GetTotalCount() => ToTalCount.Text = $"總共:{ResultTable.Rows.Count}個";
 
-        private void Bt_Search_Start_Click(object sender, EventArgs e)
-        {
-            Init1();
+        private void GetStartEnd()
+        { 
             ERotate startRotate = (Start1_X - Start_X == 0) ? ERotate.直 : ERotate.橫;
             ERotate endRotate = (End1_X - End_X == 0) ? ERotate.直 : ERotate.橫;
 
@@ -420,6 +446,7 @@ namespace WaDone
             Maze[End_X, End_Y] = 1;
             // 設定起始走點
             SolveMaze(Start1_X, Start1_Y, startRotate, new List<int>(), new List<int>());
+        
         }
 
         /// <summary>
@@ -483,19 +510,81 @@ namespace WaDone
                 Maze[row, col] = 0;  // Reset the current cell for backtracking
             }
         }
-        private void Init1()
+
+        private void CheckAnswer(List<EProperity> source)
         {
-            Start_X = int.Parse(Tb_Start_x.Text);
-            Start_Y = int.Parse(Tb_Start_y.Text);
-            Start1_X = int.Parse(Tb_Start1_x.Text);
-            Start1_Y = int.Parse(Tb_Start1_y.Text);
+            foreach ((List<int> path, List<int> trans) item in Result)
+            {
+                var transDetail = item.trans.Select(data => source[data]).GroupBy(data => data).Select(data => new
+                {
+                    properity = data.Key,
+                    count = data.Count(),
+                }).ToList();
 
-            End_X = int.Parse(Tb_End_x.Text);
-            End_Y = int.Parse(Tb_End_y.Text);
-            End1_X = int.Parse(Tb_End1_x.Text);
-            End1_Y = int.Parse(Tb_End1_y.Text);
+                bool isAnswer = true;
+                foreach (var perTransDetail in transDetail)
+                {
+                    bool tempAnswer = true;
+                    switch (perTransDetail.properity)
+                    {
+                        case EProperity.木:
+                            if (perTransDetail.count > WoodTransCount)
+                            {
+                                tempAnswer = false;
+                            }
+                            break;
 
-            PathCount = int.Parse(Tb_Path_Count.Text);
+                        case EProperity.火:
+                            if (perTransDetail.count > FireTransCount)
+                            {
+                                tempAnswer = false;
+                            }
+                            break;
+
+                        case EProperity.土:
+                            if (perTransDetail.count > DustTransCount)
+                            {
+                                tempAnswer = false;
+                            }
+                            break;
+
+                        case EProperity.金:
+                            if (perTransDetail.count > GoldTransCount)
+                            {
+                                tempAnswer = false;
+                            }
+                            break;
+
+                        case EProperity.水:
+                            if (perTransDetail.count > WaterTransCount)
+                            {
+                                tempAnswer = false;
+                            }
+                            break;
+                    }
+                    if (!tempAnswer)
+                    {
+                        isAnswer = false;
+                    }
+                }
+
+                if (isAnswer)
+                {
+                    source.RemoveAt(0);
+                    ResultAnswer.Add((source.Skip(1).ToList(), item.path));
+                    ResultTable.Columns.Add("路徑");
+                    ResultTable.Columns.Add("屬性");
+                    for (int i = 0; i < source.Count; i++)
+                    {
+                        DataRow row = ResultTable.NewRow();
+                        row[0] = source[i].ToString();
+                        row[1] = item.path[i].ToString();
+                        ResultTable.Rows.Add(row);
+                    }
+                    new Action(() => dataGridView1.DataSource = ResultTable)();
+                    break;
+                }
+            }
         }
     }
 }

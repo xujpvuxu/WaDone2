@@ -31,3 +31,14 @@ C:\Users\Administrator\source\repos\WaDone\WaDone\obj\Debug\WaDone.pdb
 \\192.168.0.100\cb_nas\CB00_Public\臨時資料_交換區\Michael\WaDone\WaDone\obj\Debug\WaDone.exe
 \\192.168.0.100\cb_nas\CB00_Public\臨時資料_交換區\Michael\WaDone\WaDone\obj\Debug\WaDone.pdb
 C:\Users\Administrator\source\repos\WaDone\WaDone\obj\Debug\WaDone.Cb_Trans_Count.resources
+C:\TFS\Other\WaDone2\WaDone\bin\Debug\WaDone.exe.config
+C:\TFS\Other\WaDone2\WaDone\bin\Debug\WaDone.exe
+C:\TFS\Other\WaDone2\WaDone\bin\Debug\WaDone.pdb
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.csproj.AssemblyReference.cache
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.csproj.SuggestedBindingRedirects.cache
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.Cb_Trans_Count.resources
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.Properties.Resources.resources
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.csproj.GenerateResource.cache
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.csproj.CoreCompileInputs.cache
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.exe
+C:\TFS\Other\WaDone2\WaDone\obj\Debug\WaDone.pdb

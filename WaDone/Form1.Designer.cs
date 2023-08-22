@@ -75,7 +75,11 @@
             this.Tb_End1_x = new System.Windows.Forms.TextBox();
             this.Tb_End_y = new System.Windows.Forms.TextBox();
             this.Tb_End_x = new System.Windows.Forms.TextBox();
-            this.Bt_Search_Start = new System.Windows.Forms.Button();
+            this.Tb_Fire_Trans_Count = new System.Windows.Forms.TextBox();
+            this.Tb_Dust_Trans_Count = new System.Windows.Forms.TextBox();
+            this.Tb_Water_Trans_Count = new System.Windows.Forms.TextBox();
+            this.Tb_Gold_Trans_Count = new System.Windows.Forms.TextBox();
+            this.Tb_Wood_Trans_Count = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,41 +143,41 @@
             // 
             this.Tb_Wood_Count.Location = new System.Drawing.Point(381, 71);
             this.Tb_Wood_Count.Name = "Tb_Wood_Count";
-            this.Tb_Wood_Count.Size = new System.Drawing.Size(100, 29);
+            this.Tb_Wood_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Wood_Count.TabIndex = 5;
-            this.Tb_Wood_Count.Text = "0";
+            this.Tb_Wood_Count.Text = "20";
             // 
             // Tb_Gold_Count
             // 
             this.Tb_Gold_Count.Location = new System.Drawing.Point(381, 228);
             this.Tb_Gold_Count.Name = "Tb_Gold_Count";
-            this.Tb_Gold_Count.Size = new System.Drawing.Size(100, 29);
+            this.Tb_Gold_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Gold_Count.TabIndex = 6;
-            this.Tb_Gold_Count.Text = "0";
+            this.Tb_Gold_Count.Text = "20";
             // 
             // Tb_Water_Count
             // 
             this.Tb_Water_Count.Location = new System.Drawing.Point(381, 278);
             this.Tb_Water_Count.Name = "Tb_Water_Count";
-            this.Tb_Water_Count.Size = new System.Drawing.Size(100, 29);
+            this.Tb_Water_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Water_Count.TabIndex = 7;
-            this.Tb_Water_Count.Text = "0";
+            this.Tb_Water_Count.Text = "20";
             // 
             // Tb_Dust_Count
             // 
             this.Tb_Dust_Count.Location = new System.Drawing.Point(381, 180);
             this.Tb_Dust_Count.Name = "Tb_Dust_Count";
-            this.Tb_Dust_Count.Size = new System.Drawing.Size(100, 29);
+            this.Tb_Dust_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Dust_Count.TabIndex = 8;
-            this.Tb_Dust_Count.Text = "0";
+            this.Tb_Dust_Count.Text = "20";
             // 
             // Tb_Fire_Count
             // 
             this.Tb_Fire_Count.Location = new System.Drawing.Point(381, 128);
             this.Tb_Fire_Count.Name = "Tb_Fire_Count";
-            this.Tb_Fire_Count.Size = new System.Drawing.Size(100, 29);
+            this.Tb_Fire_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Fire_Count.TabIndex = 9;
-            this.Tb_Fire_Count.Text = "0";
+            this.Tb_Fire_Count.Text = "20";
             // 
             // label1
             // 
@@ -226,7 +230,7 @@
             this.Tb_Path_Count.Name = "Tb_Path_Count";
             this.Tb_Path_Count.Size = new System.Drawing.Size(54, 29);
             this.Tb_Path_Count.TabIndex = 15;
-            this.Tb_Path_Count.Text = "5";
+            this.Tb_Path_Count.Text = "23";
             // 
             // label6
             // 
@@ -240,11 +244,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(506, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(511, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 31;
-            this.dataGridView1.Size = new System.Drawing.Size(1058, 844);
+            this.dataGridView1.Size = new System.Drawing.Size(790, 766);
             this.dataGridView1.TabIndex = 19;
             // 
             // label8
@@ -411,7 +415,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(61, 574);
+            this.label18.Location = new System.Drawing.Point(20, 552);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(44, 18);
             this.label18.TabIndex = 37;
@@ -420,16 +424,16 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(61, 617);
+            this.label19.Location = new System.Drawing.Point(20, 595);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(62, 22);
+            this.label19.Size = new System.Drawing.Size(52, 18);
             this.label19.TabIndex = 38;
             this.label19.Text = "起點1";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(61, 705);
+            this.label20.Location = new System.Drawing.Point(242, 595);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(52, 18);
             this.label20.TabIndex = 40;
@@ -438,7 +442,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(61, 662);
+            this.label21.Location = new System.Drawing.Point(242, 552);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(44, 18);
             this.label21.TabIndex = 39;
@@ -446,7 +450,7 @@
             // 
             // Tb_Start_x
             // 
-            this.Tb_Start_x.Location = new System.Drawing.Point(144, 571);
+            this.Tb_Start_x.Location = new System.Drawing.Point(103, 549);
             this.Tb_Start_x.Name = "Tb_Start_x";
             this.Tb_Start_x.Size = new System.Drawing.Size(47, 29);
             this.Tb_Start_x.TabIndex = 41;
@@ -454,7 +458,7 @@
             // 
             // Tb_Start_y
             // 
-            this.Tb_Start_y.Location = new System.Drawing.Point(225, 571);
+            this.Tb_Start_y.Location = new System.Drawing.Point(184, 549);
             this.Tb_Start_y.Name = "Tb_Start_y";
             this.Tb_Start_y.Size = new System.Drawing.Size(47, 29);
             this.Tb_Start_y.TabIndex = 42;
@@ -462,7 +466,7 @@
             // 
             // Tb_Start1_y
             // 
-            this.Tb_Start1_y.Location = new System.Drawing.Point(225, 614);
+            this.Tb_Start1_y.Location = new System.Drawing.Point(184, 592);
             this.Tb_Start1_y.Name = "Tb_Start1_y";
             this.Tb_Start1_y.Size = new System.Drawing.Size(47, 29);
             this.Tb_Start1_y.TabIndex = 44;
@@ -470,7 +474,7 @@
             // 
             // Tb_Start1_x
             // 
-            this.Tb_Start1_x.Location = new System.Drawing.Point(144, 614);
+            this.Tb_Start1_x.Location = new System.Drawing.Point(103, 592);
             this.Tb_Start1_x.Name = "Tb_Start1_x";
             this.Tb_Start1_x.Size = new System.Drawing.Size(47, 29);
             this.Tb_Start1_x.TabIndex = 43;
@@ -478,7 +482,7 @@
             // 
             // Tb_End1_y
             // 
-            this.Tb_End1_y.Location = new System.Drawing.Point(225, 702);
+            this.Tb_End1_y.Location = new System.Drawing.Point(406, 592);
             this.Tb_End1_y.Name = "Tb_End1_y";
             this.Tb_End1_y.Size = new System.Drawing.Size(47, 29);
             this.Tb_End1_y.TabIndex = 48;
@@ -486,15 +490,15 @@
             // 
             // Tb_End1_x
             // 
-            this.Tb_End1_x.Location = new System.Drawing.Point(144, 702);
+            this.Tb_End1_x.Location = new System.Drawing.Point(325, 592);
             this.Tb_End1_x.Name = "Tb_End1_x";
             this.Tb_End1_x.Size = new System.Drawing.Size(47, 29);
             this.Tb_End1_x.TabIndex = 47;
-            this.Tb_End1_x.Text = "0";
+            this.Tb_End1_x.Text = "3";
             // 
             // Tb_End_y
             // 
-            this.Tb_End_y.Location = new System.Drawing.Point(225, 659);
+            this.Tb_End_y.Location = new System.Drawing.Point(406, 549);
             this.Tb_End_y.Name = "Tb_End_y";
             this.Tb_End_y.Size = new System.Drawing.Size(47, 29);
             this.Tb_End_y.TabIndex = 46;
@@ -502,28 +506,62 @@
             // 
             // Tb_End_x
             // 
-            this.Tb_End_x.Location = new System.Drawing.Point(144, 659);
+            this.Tb_End_x.Location = new System.Drawing.Point(325, 549);
             this.Tb_End_x.Name = "Tb_End_x";
             this.Tb_End_x.Size = new System.Drawing.Size(47, 29);
             this.Tb_End_x.TabIndex = 45;
             this.Tb_End_x.Text = "4";
             // 
-            // Bt_Search_Start
+            // Tb_Fire_Trans_Count
             // 
-            this.Bt_Search_Start.Location = new System.Drawing.Point(209, 762);
-            this.Bt_Search_Start.Name = "Bt_Search_Start";
-            this.Bt_Search_Start.Size = new System.Drawing.Size(99, 44);
-            this.Bt_Search_Start.TabIndex = 49;
-            this.Bt_Search_Start.Text = "開始";
-            this.Bt_Search_Start.UseVisualStyleBackColor = true;
-            this.Bt_Search_Start.Click += new System.EventHandler(this.Bt_Search_Start_Click);
+            this.Tb_Fire_Trans_Count.Location = new System.Drawing.Point(447, 128);
+            this.Tb_Fire_Trans_Count.Name = "Tb_Fire_Trans_Count";
+            this.Tb_Fire_Trans_Count.Size = new System.Drawing.Size(39, 29);
+            this.Tb_Fire_Trans_Count.TabIndex = 54;
+            this.Tb_Fire_Trans_Count.Text = "20";
+            // 
+            // Tb_Dust_Trans_Count
+            // 
+            this.Tb_Dust_Trans_Count.Location = new System.Drawing.Point(447, 180);
+            this.Tb_Dust_Trans_Count.Name = "Tb_Dust_Trans_Count";
+            this.Tb_Dust_Trans_Count.Size = new System.Drawing.Size(39, 29);
+            this.Tb_Dust_Trans_Count.TabIndex = 53;
+            this.Tb_Dust_Trans_Count.Text = "20";
+            // 
+            // Tb_Water_Trans_Count
+            // 
+            this.Tb_Water_Trans_Count.Location = new System.Drawing.Point(447, 278);
+            this.Tb_Water_Trans_Count.Name = "Tb_Water_Trans_Count";
+            this.Tb_Water_Trans_Count.Size = new System.Drawing.Size(39, 29);
+            this.Tb_Water_Trans_Count.TabIndex = 52;
+            this.Tb_Water_Trans_Count.Text = "20";
+            // 
+            // Tb_Gold_Trans_Count
+            // 
+            this.Tb_Gold_Trans_Count.Location = new System.Drawing.Point(447, 228);
+            this.Tb_Gold_Trans_Count.Name = "Tb_Gold_Trans_Count";
+            this.Tb_Gold_Trans_Count.Size = new System.Drawing.Size(39, 29);
+            this.Tb_Gold_Trans_Count.TabIndex = 51;
+            this.Tb_Gold_Trans_Count.Text = "20";
+            // 
+            // Tb_Wood_Trans_Count
+            // 
+            this.Tb_Wood_Trans_Count.Location = new System.Drawing.Point(447, 71);
+            this.Tb_Wood_Trans_Count.Name = "Tb_Wood_Trans_Count";
+            this.Tb_Wood_Trans_Count.Size = new System.Drawing.Size(39, 29);
+            this.Tb_Wood_Trans_Count.TabIndex = 50;
+            this.Tb_Wood_Trans_Count.Text = "20";
             // 
             // Cb_Trans_Count
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1313, 743);
-            this.Controls.Add(this.Bt_Search_Start);
+            this.ClientSize = new System.Drawing.Size(1313, 790);
+            this.Controls.Add(this.Tb_Fire_Trans_Count);
+            this.Controls.Add(this.Tb_Dust_Trans_Count);
+            this.Controls.Add(this.Tb_Water_Trans_Count);
+            this.Controls.Add(this.Tb_Gold_Trans_Count);
+            this.Controls.Add(this.Tb_Wood_Trans_Count);
             this.Controls.Add(this.Tb_End1_y);
             this.Controls.Add(this.Tb_End1_x);
             this.Controls.Add(this.Tb_End_y);
@@ -628,7 +666,11 @@
         private System.Windows.Forms.TextBox Tb_End1_x;
         private System.Windows.Forms.TextBox Tb_End_y;
         private System.Windows.Forms.TextBox Tb_End_x;
-        private System.Windows.Forms.Button Bt_Search_Start;
+        private System.Windows.Forms.TextBox Tb_Fire_Trans_Count;
+        private System.Windows.Forms.TextBox Tb_Dust_Trans_Count;
+        private System.Windows.Forms.TextBox Tb_Water_Trans_Count;
+        private System.Windows.Forms.TextBox Tb_Gold_Trans_Count;
+        private System.Windows.Forms.TextBox Tb_Wood_Trans_Count;
     }
 }
 
