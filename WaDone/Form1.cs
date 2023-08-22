@@ -104,10 +104,16 @@ namespace WaDone
             Init();
             GetStartEnd();
             ResultTable = new DataTable();
+            ResultTable.Columns.Add("屬性");
+            ResultTable.Columns.Add("路徑");
 
             Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
+
+            dataGridView1.DataSource = ResultTable;
             GetTotalCount();
         }
+
+        private List<int> Parallel5 = Enumerable.Range(0, 5).ToList();
 
         private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
         {
@@ -115,7 +121,7 @@ namespace WaDone
             EProperity start = (EProperity)startPro;
             if (path < PathCount + 1 && ResultTable.Rows.Count == 0)
             {
-                for (int i = 0; i < 5; i++)
+                Parallel5.AsParallel().ForAll(i =>
                 {
                     int tempStartPro = startPro;
                     int tempStartEng = startEng;
@@ -313,7 +319,7 @@ namespace WaDone
                             }
                         }
                     }
-                }
+                });
             }
             else if (path == PathCount + 1)
             {
@@ -428,15 +434,15 @@ namespace WaDone
             EndEnergy = int.Parse(Tb_End_Energy.Text);
 
             // 終迄2點
-            Start_X = int.Parse(Tb_Start_x.Text);
-            Start_Y = int.Parse(Tb_Start_y.Text);
-            Start1_X = int.Parse(Tb_Start1_x.Text);
-            Start1_Y = int.Parse(Tb_Start1_y.Text);
+            Start_X = int.Parse(Tb_Start_x.Text) - 1;
+            Start_Y = int.Parse(Tb_Start_y.Text) - 1;
+            Start1_X = int.Parse(Tb_Start1_x.Text) - 1;
+            Start1_Y = int.Parse(Tb_Start1_y.Text) - 1;
 
-            End_X = int.Parse(Tb_End_x.Text);
-            End_Y = int.Parse(Tb_End_y.Text);
-            End1_X = int.Parse(Tb_End1_x.Text);
-            End1_Y = int.Parse(Tb_End1_y.Text);
+            End_X = int.Parse(Tb_End_x.Text) - 1;
+            End_Y = int.Parse(Tb_End_y.Text) - 1;
+            End1_X = int.Parse(Tb_End1_x.Text) - 1;
+            End1_Y = int.Parse(Tb_End1_y.Text) - 1;
 
             PathCount = int.Parse(Tb_Path_Count.Text);
         }
@@ -635,22 +641,19 @@ namespace WaDone
                 }
                 if (isAnswer)
                 {
-                   List<int> transValues =  item.trans.Select(x => x + 1).ToList();
+                    List<int> transValues = item.trans.Select(x => x + 1).ToList();
                     source.RemoveAt(0);
                     ResultAnswer.Add((source.Skip(1).ToList(), item.path));
-                    ResultTable.Columns.Add("屬性");
-                    ResultTable.Columns.Add("路徑");
                     for (int i = 0; i < source.Count; i++)
                     {
                         DataRow row = ResultTable.NewRow();
                         row[0] = source[i].ToString();
-                        string  v = (transValues.Contains( item.path[i]))?
-                                        ",轉彎":
+                        string v = (transValues.Contains(item.path[i])) ?
+                                        ",轉彎" :
                                         string.Empty;
                         row[1] = $@"{item.path[i]}{v}";
                         ResultTable.Rows.Add(row);
                     }
-                    new Action(() => dataGridView1.DataSource = ResultTable)();
                     break;
                 }
             }
