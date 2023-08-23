@@ -17,7 +17,6 @@ namespace WaDone
         public Cb_Trans_Count()
         {
             InitializeComponent();
-            GetTotalCount();
         }
 
         private List<(List<EProperity>, List<int>)> ResultAnswer = new List<(List<EProperity>, List<int>)>();
@@ -110,10 +109,7 @@ namespace WaDone
             Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
 
             dataGridView1.DataSource = ResultTable;
-            GetTotalCount();
         }
-
-        private List<int> Parallel5 = Enumerable.Range(0, 5).ToList();
 
         private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
         {
@@ -121,7 +117,7 @@ namespace WaDone
             EProperity start = (EProperity)startPro;
             if (path < PathCount + 1 && ResultTable.Rows.Count == 0)
             {
-                Parallel5.AsParallel().ForAll(i =>
+                for (int i = 0; i < 5; i++)
                 {
                     int tempStartPro = startPro;
                     int tempStartEng = startEng;
@@ -319,7 +315,7 @@ namespace WaDone
                             }
                         }
                     }
-                });
+                }
             }
             else if (path == PathCount + 1)
             {
@@ -446,8 +442,6 @@ namespace WaDone
 
             PathCount = int.Parse(Tb_Path_Count.Text);
         }
-
-        private void GetTotalCount() => ToTalCount.Text = $"總共:{ResultTable.Rows.Count}個";
 
         private void GetStartEnd()
         {
@@ -657,6 +651,21 @@ namespace WaDone
                     break;
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Tb_End1_x.Text = Tb_End_x.Text;
+            Tb_End1_y.Text = Tb_End_y.Text;
+            Tb_Start1_x.Text = Tb_Start_x.Text;
+            Tb_Start1_y.Text = Tb_Start_y.Text;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
+            int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
+            Tb_Path_Count.Text = (diffY + diffX + 1).ToString();
         }
     }
 }
