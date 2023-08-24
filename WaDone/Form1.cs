@@ -598,14 +598,14 @@ namespace WaDone
                             // 轉彎判斷
                             if (transDetail.TryGetValue(perNeed.properity, out int goldTransCount))
                             {
-                                if (goldTransCount > DustTransCount)
+                                if (goldTransCount > GoldTransCount)
                                 {
                                     tempAnswer = false;
                                 }
                             }
 
                             // 直線判斷
-                            if (DustStrageCount < (perNeed.count - goldTransCount))
+                            if (GoldStrageCount < (perNeed.count - goldTransCount))
                             {
                                 tempAnswer = false;
                             }
@@ -622,7 +622,7 @@ namespace WaDone
                             }
 
                             // 直線判斷
-                            if (WaterStrageCount < (WaterCount - waterTransCount))
+                            if (WaterStrageCount < (perNeed.count - waterTransCount))
                             {
                                 tempAnswer = false;
                             }
