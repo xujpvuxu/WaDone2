@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -97,6 +98,8 @@ namespace WaDone
         private int[,] Maze = null;
         private Dictionary<(int, int), int> PathRecord = new Dictionary<(int, int), int>();
         private ERotate EndRotate = ERotate.橫;
+
+        private int CurrentPoint = 0;
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
@@ -653,19 +656,120 @@ namespace WaDone
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Tb_End1_x.Text = Tb_End_x.Text;
-            Tb_End1_y.Text = Tb_End_y.Text;
-            Tb_Start1_x.Text = Tb_Start_x.Text;
-            Tb_Start1_y.Text = Tb_Start_y.Text;
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
             int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
             Tb_Path_Count.Text = (diffY + diffX + 1).ToString();
         }
+
+        private void SetPoint(object sender)
+        {
+            System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
+            string[] xy = btn.Text.Split(',');
+            switch (CurrentPoint)
+            {
+                case 0:
+                    Tb_Start_x.Text = xy[0];
+                    Tb_Start_y.Text = xy[1];
+                    break;
+
+                case 1:
+                    Tb_Start1_x.Text = xy[0];
+                    Tb_Start1_y.Text = xy[1];
+                    break;
+
+                case 2:
+                    Tb_End_x.Text = xy[0];
+                    Tb_End_y.Text = xy[1];
+                    break;
+
+                case 3:
+                    Tb_End1_x.Text = xy[0];
+                    Tb_End1_y.Text = xy[1];
+                    break;
+
+                default:
+                    break;
+            }
+            CurrentPoint++;
+        }
+
+        /// <summary>
+        /// 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button28_Click(object sender, EventArgs e) => CurrentPoint = 0;
+
+        private void button4_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button3_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button8_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button7_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button6_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        /// <summary>
+        /// 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button12_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button5_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button9_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button10_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        /// <summary>
+        /// 3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button16_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button17_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button13_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button14_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button15_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        /// <summary>
+        /// 4
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button21_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button22_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button18_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button19_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button20_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        /// <summary>
+        /// 5
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button26_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button27_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button23_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button24_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        private void button25_Click(object sender, EventArgs e) => SetPoint(sender);
     }
 }
