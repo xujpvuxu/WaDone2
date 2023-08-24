@@ -105,13 +105,16 @@ namespace WaDone
         {
             Init();
             GetStartEnd();
-            ResultTable = new DataTable();
-            ResultTable.Columns.Add("屬性");
-            ResultTable.Columns.Add("路徑");
+            if (Result.Any())
+            {
+                ResultTable = new DataTable();
+                ResultTable.Columns.Add("屬性");
+                ResultTable.Columns.Add("路徑");
 
-            Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
+                Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
 
-            dataGridView1.DataSource = ResultTable;
+                dataGridView1.DataSource = ResultTable;
+            }
         }
 
         private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
