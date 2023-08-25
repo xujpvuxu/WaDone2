@@ -45,10 +45,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.Cb_Middle_Properity = new System.Windows.Forms.ComboBox();
-            this.Tb_Middle_Path = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.ToTalCount = new System.Windows.Forms.Label();
             this.Cb_Len_Properity = new System.Windows.Forms.ComboBox();
             this.Tb_Len_Count = new System.Windows.Forms.TextBox();
@@ -273,47 +269,6 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "能量";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(299, 376);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 18);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "篩選";
-            // 
-            // Cb_Middle_Properity
-            // 
-            this.Cb_Middle_Properity.FormattingEnabled = true;
-            this.Cb_Middle_Properity.Items.AddRange(new object[] {
-            "木",
-            "火",
-            "土",
-            "金",
-            "水"});
-            this.Cb_Middle_Properity.Location = new System.Drawing.Point(354, 366);
-            this.Cb_Middle_Properity.Name = "Cb_Middle_Properity";
-            this.Cb_Middle_Properity.Size = new System.Drawing.Size(54, 26);
-            this.Cb_Middle_Properity.TabIndex = 25;
-            this.Cb_Middle_Properity.Text = "木";
-            // 
-            // Tb_Middle_Path
-            // 
-            this.Tb_Middle_Path.Location = new System.Drawing.Point(435, 366);
-            this.Tb_Middle_Path.Name = "Tb_Middle_Path";
-            this.Tb_Middle_Path.Size = new System.Drawing.Size(47, 29);
-            this.Tb_Middle_Path.TabIndex = 24;
-            this.Tb_Middle_Path.Text = "0";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(438, 332);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 18);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "路徑";
-            // 
             // ToTalCount
             // 
             this.ToTalCount.AutoSize = true;
@@ -366,7 +321,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(23, 378);
+            this.label15.Location = new System.Drawing.Point(23, 384);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(44, 18);
             this.label15.TabIndex = 33;
@@ -374,7 +329,7 @@
             // 
             // Tb_Trans_Count
             // 
-            this.Tb_Trans_Count.Location = new System.Drawing.Point(159, 375);
+            this.Tb_Trans_Count.Location = new System.Drawing.Point(159, 381);
             this.Tb_Trans_Count.Name = "Tb_Trans_Count";
             this.Tb_Trans_Count.Size = new System.Drawing.Size(47, 29);
             this.Tb_Trans_Count.TabIndex = 34;
@@ -383,7 +338,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(219, 378);
+            this.label16.Location = new System.Drawing.Point(219, 384);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(26, 18);
             this.label16.TabIndex = 35;
@@ -965,10 +920,6 @@
             this.Controls.Add(this.Cb_Len_Properity);
             this.Controls.Add(this.Tb_Len_Count);
             this.Controls.Add(this.ToTalCount);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.Cb_Middle_Properity);
-            this.Controls.Add(this.Tb_Middle_Path);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -1013,10 +964,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox Cb_Middle_Properity;
-        private System.Windows.Forms.TextBox Tb_Middle_Path;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label ToTalCount;
         private System.Windows.Forms.ComboBox Cb_Len_Properity;
         private System.Windows.Forms.TextBox Tb_Len_Count;
