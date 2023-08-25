@@ -28,11 +28,6 @@ namespace WaDone
 
         private int StartEnergy = 0;
 
-        // 中間篩選
-        private EProperity MiddleProperity;
-
-        private int MiddlePath = 0;
-
         // 結束
         private int EndProperity = 0;
 
@@ -100,6 +95,7 @@ namespace WaDone
         private ERotate EndRotate = ERotate.橫;
 
         private int CurrentPoint = 0;
+        private int CurrentProperity = 0;
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
@@ -297,28 +293,8 @@ namespace WaDone
                     {
                         if (tempStartEng != 0 && tempStartEng != 4)
                         {
-                            // 篩選路徑 等於0 不檢查
-                            if (MiddlePath == 0)
-                            {
-                                tempProcess.Add(encome);
-                                Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess);
-                            }
-                            else
-                            {
-                                if (MiddlePath == path)
-                                {
-                                    if (encome == MiddleProperity)
-                                    {
-                                        tempProcess.Add(encome);
-                                        Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess);
-                                    }
-                                }
-                                else
-                                {
-                                    tempProcess.Add(encome);
-                                    Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess);
-                                }
-                            }
+                            tempProcess.Add(encome);
+                            Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess);
                         }
                     }
                 }
@@ -408,7 +384,6 @@ namespace WaDone
 
             //路徑數量
             PathCount = int.Parse(Tb_Path_Count.Text);
-            MiddlePath = int.Parse(Tb_Middle_Path.Text);
             TransCount = int.Parse(Tb_Trans_Count.Text);
 
             Total_Properity_Lenth = int.Parse(Tb_Len_Count.Text);
@@ -427,7 +402,6 @@ namespace WaDone
 
             // 屬性
             StartProperity = NameToInt[Cb_Start_Properity.Text];
-            MiddleProperity = (EProperity)NameToInt[Cb_Middle_Properity.Text];
             EndProperity = NameToInt[Cb_End_Properity.Text];
             Total_Properity = (EProperity)NameToInt[Cb_Len_Properity.Text];
 
@@ -452,9 +426,10 @@ namespace WaDone
         private void GetStartEnd()
         {
             ERotate startRotate = (Start1_X - Start_X == 0) ? ERotate.直 : ERotate.橫;
-            ERotate endRotate = (End1_X - End_X == 0) ? ERotate.直 : ERotate.橫;
+            EndRotate = (End1_X - End_X == 0) ? ERotate.直 : ERotate.橫;
 
             Result = new List<(List<int>, List<int>)>();
+            ResultAnswer = new List<(List<EProperity>, List<int>)>();
             Maze = new int[Length, Length];
             List<int> maxLength = Enumerable.Range(0, Length).ToList();
             PathRecord = maxLength.SelectMany(x => maxLength, (x, y) => (x, y)).ToDictionary(
@@ -532,10 +507,12 @@ namespace WaDone
 
         private void CheckAnswer(List<EProperity> source)
         {
+            // 總路徑 所需個屬性需要的數量
             var totalNeed = source.Skip(1).GroupBy(x => x).Select(prop => new { properity = prop.Key, count = prop.Count() }).ToList();
 
             foreach ((List<int> path, List<int> trans) item in Result)
             {
+                // 總轉彎 所需屬性的數量
                 Dictionary<int, int> transToIndex = item.path.Select((data, i) => new { value = data, index = i }).ToDictionary(x => x.value - 1, y => y.index + 1);
 
                 var transDetail = item.trans.Select(data => source[transToIndex[data]]).GroupBy(data => data).ToDictionary(
@@ -659,13 +636,6 @@ namespace WaDone
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
-            int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
-            Tb_Path_Count.Text = (diffY + diffX + 1).ToString();
-        }
-
         private void SetPoint(object sender)
         {
             System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
@@ -675,27 +645,34 @@ namespace WaDone
                 case 0:
                     Tb_Start_x.Text = xy[0];
                     Tb_Start_y.Text = xy[1];
+                    CurrentPoint++;
                     break;
 
                 case 1:
                     Tb_Start1_x.Text = xy[0];
                     Tb_Start1_y.Text = xy[1];
+                    CurrentPoint++;
                     break;
 
                 case 2:
                     Tb_End_x.Text = xy[0];
                     Tb_End_y.Text = xy[1];
+                    CurrentPoint++;
                     break;
 
                 case 3:
                     Tb_End1_x.Text = xy[0];
                     Tb_End1_y.Text = xy[1];
+
+                    int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
+                    int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
+                    Tb_Path_Count.Text = (diffY + diffX + 1).ToString();
+                    CurrentPoint = 0;
                     break;
 
                 default:
                     break;
             }
-            CurrentPoint++;
         }
 
         /// <summary>
@@ -703,8 +680,6 @@ namespace WaDone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button28_Click(object sender, EventArgs e) => CurrentPoint = 0;
-
         private void button4_Click(object sender, EventArgs e) => SetPoint(sender);
 
         private void button3_Click(object sender, EventArgs e) => SetPoint(sender);
@@ -774,5 +749,50 @@ namespace WaDone
         private void button24_Click(object sender, EventArgs e) => SetPoint(sender);
 
         private void button25_Click(object sender, EventArgs e) => SetPoint(sender);
+
+        /// <summary>
+        /// 起訖屬性
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e) => GetStartProperity(sender);
+
+        private void button30_Click(object sender, EventArgs e) => GetStartProperity(sender);
+
+        private void button29_Click(object sender, EventArgs e) => GetStartProperity(sender);
+
+        private void button28_Click(object sender, EventArgs e) => GetStartProperity(sender);
+
+        private void button2_Click(object sender, EventArgs e) => GetStartProperity(sender);
+
+        private void GetStartProperity(object sender)
+        {
+            System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
+            string text = btn.Text;
+            switch (CurrentProperity)
+            {
+                case 0:
+                    Cb_Start_Properity.Text = text;
+                    CurrentProperity++;
+                    break;
+
+                case 1:
+                    Cb_End_Properity.Text = text;
+                    CurrentProperity = 0;
+                    break;
+            }
+        }
+
+        private void Tb_Gold_Trans_Count_TextChanged(object sender, EventArgs e)
+        {
+            List<int> source = new List<int>
+            {
+                int.Parse(Tb_Wood_Count.Text),
+                int.Parse(Tb_Fire_Count.Text),
+                int.Parse(Tb_Gold_Count.Text),
+                int.Parse(Tb_Dust_Count.Text),
+            };
+            Tb_Water_Count.Text = (23 - source.Sum()).ToString();
+        }
     }
 }
