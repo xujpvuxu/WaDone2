@@ -97,20 +97,30 @@ namespace WaDone
         private int CurrentPoint = 0;
         private int CurrentProperity = 0;
 
+        private string ErrorMessage = string.Empty;
+
         private void Btn_Start_Click(object sender, EventArgs e)
         {
             Init();
             GetStartEnd();
-            if (Result.Any())
+            if (string.IsNullOrEmpty(ErrorMessage))
             {
-                ResultTable = new DataTable();
-                ResultTable.Columns.Add("屬性");
-                ResultTable.Columns.Add("路徑");
+                if (Result.Any())
+                {
+                    ResultTable = new DataTable();
+                    ResultTable.Columns.Add("屬性");
+                    ResultTable.Columns.Add("路徑");
 
-                Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
+                    Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
 
-                dataGridView1.DataSource = ResultTable;
+                    dataGridView1.DataSource = ResultTable;
+                }
+                else
+                {
+                    ErrorMessage = "無解答";
+                }
             }
+            label1.Text = ErrorMessage;
         }
 
         private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
@@ -362,6 +372,8 @@ namespace WaDone
         /// </summary>
         private void Init()
         {
+            ErrorMessage = string.Empty;
+
             // 五屬性數量
             WoodCount = int.Parse(Tb_Wood_Count.Text);
             FireCount = int.Parse(Tb_Fire_Count.Text);
@@ -453,13 +465,15 @@ namespace WaDone
                     if (totalTransCount % 2 != 0)
                     {
                         Result = new List<(List<int>, List<int>)>();
+                        ErrorMessage = "轉彎數不對";
                     }
                 }
                 else
-                { 
+                {
                     if (totalTransCount % 2 == 0)
                     {
                         Result = new List<(List<int>, List<int>)>();
+                        ErrorMessage = "轉彎數不對";
                     }
                 }
             }
