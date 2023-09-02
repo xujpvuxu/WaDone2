@@ -439,8 +439,30 @@ namespace WaDone
             // 設定 起始終迄點
             Maze[Start_X, Start_Y] = 1;
             Maze[End_X, End_Y] = 1;
+
             // 設定起始走點
             SolveMaze(Start1_X, Start1_Y, startRotate, new List<int>(), new List<int>());
+
+            // 判斷轉彎數
+            int totalTransCount = WoodTransCount + FireTransCount + DustTransCount + GoldTransCount + WaterTransCount;
+            Result = Result.Where(x => x.Item2.Count <= totalTransCount).ToList();
+            if (PathCount == 23)
+            {
+                if (startRotate == EndRotate)
+                {
+                    if (totalTransCount % 2 != 0)
+                    {
+                        Result = new List<(List<int>, List<int>)>();
+                    }
+                }
+                else
+                { 
+                    if (totalTransCount % 2 == 0)
+                    {
+                        Result = new List<(List<int>, List<int>)>();
+                    }
+                }
+            }
         }
 
         /// <summary>
