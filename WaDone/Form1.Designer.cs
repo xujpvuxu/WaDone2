@@ -173,7 +173,6 @@
             this.Tb_Wood_Count.Name = "Tb_Wood_Count";
             this.Tb_Wood_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Wood_Count.TabIndex = 5;
-            this.Tb_Wood_Count.Text = "3";
             // 
             // Tb_Gold_Count
             // 
@@ -181,7 +180,6 @@
             this.Tb_Gold_Count.Name = "Tb_Gold_Count";
             this.Tb_Gold_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Gold_Count.TabIndex = 6;
-            this.Tb_Gold_Count.Text = "3";
             // 
             // Tb_Water_Count
             // 
@@ -189,7 +187,6 @@
             this.Tb_Water_Count.Name = "Tb_Water_Count";
             this.Tb_Water_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Water_Count.TabIndex = 7;
-            this.Tb_Water_Count.Text = "3";
             // 
             // Tb_Dust_Count
             // 
@@ -197,7 +194,6 @@
             this.Tb_Dust_Count.Name = "Tb_Dust_Count";
             this.Tb_Dust_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Dust_Count.TabIndex = 8;
-            this.Tb_Dust_Count.Text = "3";
             // 
             // Tb_Fire_Count
             // 
@@ -205,7 +201,6 @@
             this.Tb_Fire_Count.Name = "Tb_Fire_Count";
             this.Tb_Fire_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Fire_Count.TabIndex = 9;
-            this.Tb_Fire_Count.Text = "3";
             // 
             // Tb_Path_Count
             // 
@@ -460,7 +455,6 @@
             this.Tb_Fire_Trans_Count.Name = "Tb_Fire_Trans_Count";
             this.Tb_Fire_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Fire_Trans_Count.TabIndex = 54;
-            this.Tb_Fire_Trans_Count.Text = "3";
             // 
             // Tb_Dust_Trans_Count
             // 
@@ -468,7 +462,6 @@
             this.Tb_Dust_Trans_Count.Name = "Tb_Dust_Trans_Count";
             this.Tb_Dust_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Dust_Trans_Count.TabIndex = 53;
-            this.Tb_Dust_Trans_Count.Text = "3";
             // 
             // Tb_Water_Trans_Count
             // 
@@ -476,7 +469,6 @@
             this.Tb_Water_Trans_Count.Name = "Tb_Water_Trans_Count";
             this.Tb_Water_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Water_Trans_Count.TabIndex = 52;
-            this.Tb_Water_Trans_Count.Text = "3";
             // 
             // Tb_Gold_Trans_Count
             // 
@@ -484,7 +476,6 @@
             this.Tb_Gold_Trans_Count.Name = "Tb_Gold_Trans_Count";
             this.Tb_Gold_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Gold_Trans_Count.TabIndex = 51;
-            this.Tb_Gold_Trans_Count.Text = "3";
             this.Tb_Gold_Trans_Count.TextChanged += new System.EventHandler(this.Tb_Gold_Trans_Count_TextChanged);
             // 
             // Tb_Wood_Trans_Count
@@ -493,7 +484,6 @@
             this.Tb_Wood_Trans_Count.Name = "Tb_Wood_Trans_Count";
             this.Tb_Wood_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Wood_Trans_Count.TabIndex = 50;
-            this.Tb_Wood_Trans_Count.Text = "3";
             // 
             // label22
             // 
