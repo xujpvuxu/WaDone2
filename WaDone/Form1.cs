@@ -149,7 +149,7 @@ namespace WaDone
 
             // 設定起訖顏色
             dataGridView1.Rows[Start_Y].Cells[Start_X].Style.BackColor = changeColor[(EProperity)StartProperity];
-            dataGridView1.Rows[End_Y].Cells[End_X].Style.BackColor = changeColor[(EProperity)StartProperity];
+            dataGridView1.Rows[End_Y].Cells[End_X].Style.BackColor = changeColor[(EProperity)EndProperity];
             for (int i = 0; i < ResultPath.Count; i++)
             {
                 (int x, int y) = ParseCoor[ResultPath[i]];
