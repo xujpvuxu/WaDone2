@@ -98,6 +98,15 @@ namespace WaDone
         private int CurrentProperity = 0;
 
         private string ErrorMessage = string.Empty;
+        private bool HasAnswer = false;
+        private List<EProperity> ResultProperityPath = new List<EProperity>();
+        private List<int> ResultPath = new List<int>();
+        private List<int> ResultTransPath = new List<int>();
+
+        private Dictionary<int, (int x, int y)> ParseCoor = Enumerable.Range(0, 5).SelectMany(x => Enumerable.Range(0, 5), (x, y) => (x, y))
+                                                                 .ToDictionary(
+                                                                       index => (index.x + 1) + (5 * index.y),
+                                                                       coordinate => (coordinate.x, coordinate.y));
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
@@ -108,12 +117,13 @@ namespace WaDone
                 if (Result.Any())
                 {
                     ResultTable = new DataTable();
-                    ResultTable.Columns.Add("屬性");
-                    ResultTable.Columns.Add("路徑");
+                    Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
+                    Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
 
                     Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
 
                     dataGridView1.DataSource = ResultTable;
+                    TransAnswer();
                 }
                 else
                 {
@@ -123,11 +133,35 @@ namespace WaDone
             label1.Text = ErrorMessage;
         }
 
+        /// <summary>
+        /// 結果顯示轉換
+        /// </summary>
+        private void TransAnswer()
+        {
+            Dictionary<EProperity, Color> changeColor = new Dictionary<EProperity, Color>
+            {
+                { EProperity.木,Color.Lime},
+                { EProperity.火,Color.Red},
+                { EProperity.金,Color.Yellow},
+                { EProperity.土,Color.Chocolate},
+                { EProperity.水,Color.Cyan}
+            };
+
+            // 設定起訖顏色
+            dataGridView1.Rows[Start_Y].Cells[Start_X].Style.BackColor = changeColor[(EProperity)StartProperity];
+            dataGridView1.Rows[End_Y].Cells[End_X].Style.BackColor = changeColor[(EProperity)StartProperity];
+            for (int i = 0; i < ResultPath.Count; i++)
+            {
+                (int x, int y) = ParseCoor[ResultPath[i]];
+                dataGridView1.Rows[y].Cells[x].Style.BackColor = changeColor[ResultProperityPath[i]];
+            }
+        }
+
         private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
         {
             path++;
             EProperity start = (EProperity)startPro;
-            if (path < PathCount + 1 && ResultTable.Rows.Count == 0)
+            if (path < PathCount + 1 && !HasAnswer)
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -372,6 +406,7 @@ namespace WaDone
         /// </summary>
         private void Init()
         {
+            HasAnswer = false;
             ErrorMessage = string.Empty;
 
             // 五屬性數量
@@ -654,18 +689,41 @@ namespace WaDone
                 }
                 if (isAnswer)
                 {
-                    List<int> transValues = item.trans.Select(x => x + 1).ToList();
+                    ResultTransPath = item.trans.Select(x => x + 1).ToList();
                     source.RemoveAt(0);
                     ResultAnswer.Add((source.Skip(1).ToList(), item.path));
-                    for (int i = 0; i < source.Count; i++)
+                    HasAnswer = true;
+                    ResultProperityPath = source;
+                    ResultPath = item.path;
+                    // 設定轉彎
+                    Dictionary<(int, int), string> trans = new Dictionary<(int, int), string>
+            {
+                { (5,1),"└"},
+                { (5,-1),"┘"},
+                { (1,-5),"┘"},
+                { (1,5),"┐"},
+                { (-5,1),"┌"},
+                { (-5,-1),"┐"},
+                { (-1,-5),"└"},
+                { (-1,5),"┌"},
+            };
+                    // 加入起訖
+                    List<int> tempPath = new List<int> { PathRecord[(Start_X, Start_Y)] };
+                    tempPath.AddRange(ResultPath);
+                    tempPath.Add(PathRecord[(End_X, End_Y)]);
+
+                    // 加入起訖文字
+                    ResultTable.Rows[Start_Y][Start_X] = "▼";
+                    ResultTable.Rows[End_Y][End_X] = "△";
+
+                    foreach (int perTrans in ResultTransPath)
                     {
-                        DataRow row = ResultTable.NewRow();
-                        row[0] = source[i].ToString();
-                        string v = (transValues.Contains(item.path[i])) ?
-                                        ",轉彎" :
-                                        string.Empty;
-                        row[1] = $@"{item.path[i]}{v}";
-                        ResultTable.Rows.Add(row);
+                        int transIndex = tempPath.IndexOf(perTrans);
+                        int diffSource = tempPath[transIndex] - tempPath[transIndex - 1];
+                        int diffTarget = tempPath[transIndex + 1] - tempPath[transIndex];
+
+                        (int x, int y) = ParseCoor[perTrans];
+                        ResultTable.Rows[y][x] = trans[(diffSource, diffTarget)];
                     }
                     break;
                 }
