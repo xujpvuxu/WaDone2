@@ -713,8 +713,8 @@ namespace WaDone
                     tempPath.Add(PathRecord[(End_X, End_Y)]);
 
                     // 加入起訖文字
-                    ResultTable.Rows[Start_Y][Start_X] = "▼";
-                    ResultTable.Rows[End_Y][End_X] = "△";
+                    ResultTable.Rows[Start_Y][Start_X] = "🐭";
+                    ResultTable.Rows[End_Y][End_X] = "🧀";
 
                     foreach (int perTrans in ResultTransPath)
                     {

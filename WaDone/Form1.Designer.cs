@@ -222,13 +222,14 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(96, 466);
+            this.dataGridView1.Location = new System.Drawing.Point(291, 466);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.RowHeadersWidth = 64;
             this.dataGridView1.RowTemplate.Height = 31;
-            this.dataGridView1.Size = new System.Drawing.Size(790, 337);
+            this.dataGridView1.Size = new System.Drawing.Size(313, 286);
             this.dataGridView1.TabIndex = 19;
             // 
             // label8
@@ -859,7 +860,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 829);
+            this.ClientSize = new System.Drawing.Size(957, 764);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
