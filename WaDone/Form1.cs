@@ -16,52 +16,6 @@ namespace WaDone
         public Cb_Trans_Count()
         {
             InitializeComponent();
-
-            string processor = "Win32_Processor";//類名
-            ManagementClass driveClass = new ManagementClass(processor);
-            string computerUUID = driveClass.GetQualifierValue("UUID").ToString().Replace("{", string.Empty).Replace("}", string.Empty);
-
-            string AesKey = "mouseCute";
-            string AesIv = "writeMessage";
-            int IvLength = 16;
-
-            string encrypt = string.Empty;
-            try
-            {
-                AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
-                SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-                byte[] keyData = sha256.ComputeHash(Encoding.UTF8.GetBytes(AesKey));
-                byte[] ivData = sha256.ComputeHash(Encoding.UTF8.GetBytes(AesIv)).Take(IvLength).ToArray();
-                byte[] dataByteArray = Encoding.UTF8.GetBytes(computerUUID);
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(keyData, ivData), CryptoStreamMode.Write))
-                    {
-                        cs.Write(dataByteArray, 0, dataByteArray.Length);
-                        cs.FlushFinalBlock();
-
-                        encrypt = Convert.ToBase64String(ms.ToArray());
-                    }
-                }
-            }
-            catch { }
-            string config = "3345678";
-            if (File.Exists("config.txt"))
-            {
-                using (StreamReader sr = new StreamReader("config.txt"))
-                {
-                    config = sr.ReadLine();
-                }
-                if (encrypt != config)
-                {
-                    Environment.Exit(1);
-                }
-            }
-            else
-            {
-                Environment.Exit(1);
-            }
         }
 
         private List<(List<EProperity>, List<int>)> ResultAnswer = new List<(List<EProperity>, List<int>)>();
