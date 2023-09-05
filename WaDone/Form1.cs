@@ -110,18 +110,23 @@ namespace WaDone
         {
             Init();
             GetStartEnd();
+
+            ResultTable = new DataTable();
+            Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
+            Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
+            dataGridView1.DataSource = ResultTable;
+
             if (string.IsNullOrEmpty(ErrorMessage))
             {
                 if (Result.Any())
                 {
-                    ResultTable = new DataTable();
-                    Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
-                    Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
-
                     Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
 
-                    dataGridView1.DataSource = ResultTable;
-                    TransAnswer();
+                    if (HasAnswer)
+                    {
+                        dataGridView1.DataSource = ResultTable;
+                        TransAnswer();
+                    }
                 }
                 else
                 {
@@ -345,53 +350,55 @@ namespace WaDone
             {
                 if (startPro == EndProperity && startEng == EndEnergy)
                 {
-                    bool isAdd = false;
-
-                    List<EProperity> tempProcess = process.Skip(1).ToList();
-
-                    if (Total_Properity_Lenth != 0 || TransCount != 0)
+                    // 檢查 [某屬性幾次, 轉數幾次]
+                    bool[] isAllMatch = new bool[] { false, false };
+                    // 至少某屬性幾次
+                    if (Total_Properity_Lenth == 0)
                     {
-                        // 至少某屬性幾次
-                        if (Total_Properity_Lenth != 0)
-                        {
-                            if (tempProcess.Where(x => x == Total_Properity).Count() >= Total_Properity_Lenth)
-                            {
-                                isAdd = true;
-                            }
-                        }
-                        if (TransCount != 0)
-                        {
-                            int maxCount = 0;
-                            int lastValue = ProperityToInt.Last().Value;
-                            List<EProperity> tempTransList = process.ToList();
-                            tempTransList.Add((EProperity)EndProperity);
-
-                            int properityRecord = ProperityToInt[tempTransList.First()];
-                            var _ = tempTransList.Aggregate((x, y) =>
-                            {
-                                int source = ProperityToInt[x];
-                                int target = (ProperityToInt[y] == ProperityToInt.First().Value) ?
-                                                        lastValue + 1 :
-                                                        ProperityToInt[y];
-                                if (source == properityRecord && source + 1 == target)
-                                {
-                                    // 轉屬
-                                    maxCount++;
-                                    properityRecord = (target == lastValue + 1) ? 0 : target;
-                                }
-                                return y;
-                            });
-                            if (maxCount >= TransCount)
-                            {
-                                isAdd = true;
-                            }
-                        }
+                        isAllMatch[0] = true;
                     }
                     else
                     {
-                        isAdd = true;
+                        List<EProperity> tempProcess = process.ToList();
+                        tempProcess.Add((EProperity)EndProperity);
+                        if (tempProcess.Where(x => x == Total_Properity).Count() >= Total_Properity_Lenth)
+                        {
+                            isAllMatch[0] = true;
+                        }
                     }
-                    if (isAdd)
+
+                    if (TransCount == 0)
+                    {
+                        isAllMatch[1] = true;
+                    }
+                    else
+                    {
+                        int maxCount = 0;
+                        int lastValue = ProperityToInt.Last().Value;
+                        List<EProperity> tempTransList = process.ToList();
+                        tempTransList.Add((EProperity)EndProperity);
+
+                        int properityRecord = ProperityToInt[tempTransList.First()];
+                        var _ = tempTransList.Aggregate((x, y) =>
+                        {
+                            int source = ProperityToInt[x];
+                            int target = (ProperityToInt[y] == ProperityToInt.First().Value) ?
+                                                    lastValue + 1 :
+                                                    ProperityToInt[y];
+                            if (source == properityRecord && source + 1 == target)
+                            {
+                                // 轉屬
+                                maxCount++;
+                                properityRecord = (target == lastValue + 1) ? 0 : target;
+                            }
+                            return y;
+                        });
+                        if (maxCount >= TransCount)
+                        {
+                            isAllMatch[1] = true;
+                        }
+                    }
+                    if (isAllMatch.All(x => x))
                     {
                         CheckAnswer(process);
                     }
@@ -428,7 +435,7 @@ namespace WaDone
             WaterStrageCount = WaterCount - WaterTransCount;
 
             //路徑數量
-            PathCount = int.Parse(Tb_Path_Count.Text);
+            PathCount = int.Parse(Tb_Path_Count.Text) - 2;
             TransCount = int.Parse(Tb_Trans_Count.Text);
 
             Total_Properity_Lenth = int.Parse(Tb_Len_Count.Text);
@@ -464,8 +471,6 @@ namespace WaDone
             End_Y = int.Parse(Tb_End_y.Text) - 1;
             End1_X = int.Parse(Tb_End1_x.Text) - 1;
             End1_Y = int.Parse(Tb_End1_y.Text) - 1;
-
-            PathCount = int.Parse(Tb_Path_Count.Text);
         }
 
         private void GetStartEnd()
@@ -695,16 +700,16 @@ namespace WaDone
                     ResultPath = item.path;
                     // 設定轉彎
                     Dictionary<(int, int), string> trans = new Dictionary<(int, int), string>
-            {
-                { (5,1),"└"},
-                { (5,-1),"┘"},
-                { (1,-5),"┘"},
-                { (1,5),"┐"},
-                { (-5,1),"┌"},
-                { (-5,-1),"┐"},
-                { (-1,-5),"└"},
-                { (-1,5),"┌"},
-            };
+                    {
+                        { (5,1),"└"},
+                        { (5,-1),"┘"},
+                        { (1,-5),"┘"},
+                        { (1,5),"┐"},
+                        { (-5,1),"┌"},
+                        { (-5,-1),"┐"},
+                        { (-1,-5),"└"},
+                        { (-1,5),"┌"},
+                    };
                     // 加入起訖
                     List<int> tempPath = new List<int> { PathRecord[(Start_X, Start_Y)] };
                     tempPath.AddRange(ResultPath);
@@ -758,7 +763,7 @@ namespace WaDone
 
                     int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
                     int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
-                    Tb_Path_Count.Text = (diffY + diffX + 1).ToString();
+                    Tb_Path_Count.Text = (diffY + diffX + 3).ToString();
                     CurrentPoint = 0;
                     break;
 
