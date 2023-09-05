@@ -496,7 +496,7 @@ namespace WaDone
             // 判斷轉彎數
             int totalTransCount = WoodTransCount + FireTransCount + DustTransCount + GoldTransCount + WaterTransCount;
             Result = Result.Where(x => x.Item2.Count <= totalTransCount).ToList();
-            if (PathCount == 23)
+            if (PathCount == 25)
             {
                 if (startRotate == EndRotate)
                 {
