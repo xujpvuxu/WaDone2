@@ -208,7 +208,6 @@
             this.Tb_Path_Count.Name = "Tb_Path_Count";
             this.Tb_Path_Count.Size = new System.Drawing.Size(54, 29);
             this.Tb_Path_Count.TabIndex = 15;
-            this.Tb_Path_Count.Text = "5";
             // 
             // label6
             // 
@@ -297,7 +296,6 @@
             this.Tb_Len_Count.Name = "Tb_Len_Count";
             this.Tb_Len_Count.Size = new System.Drawing.Size(47, 29);
             this.Tb_Len_Count.TabIndex = 29;
-            this.Tb_Len_Count.Text = "0";
             // 
             // label7
             // 
@@ -332,7 +330,6 @@
             this.Tb_Trans_Count.Name = "Tb_Trans_Count";
             this.Tb_Trans_Count.Size = new System.Drawing.Size(47, 29);
             this.Tb_Trans_Count.TabIndex = 34;
-            this.Tb_Trans_Count.Text = "0";
             // 
             // label16
             // 

@@ -115,6 +115,7 @@ namespace WaDone
             Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
             Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
             dataGridView1.DataSource = ResultTable;
+            dataGridView1.ClearSelection();
 
             if (string.IsNullOrEmpty(ErrorMessage))
             {
@@ -126,6 +127,7 @@ namespace WaDone
                     {
                         dataGridView1.DataSource = ResultTable;
                         TransAnswer();
+                        dataGridView1.ClearSelection();
                     }
                 }
                 else
@@ -415,18 +417,18 @@ namespace WaDone
             ErrorMessage = string.Empty;
 
             // 五屬性數量
-            WoodCount = int.Parse(Tb_Wood_Count.Text);
-            FireCount = int.Parse(Tb_Fire_Count.Text);
-            DustCount = int.Parse(Tb_Dust_Count.Text);
-            GoldCount = int.Parse(Tb_Gold_Count.Text);
-            WaterCount = int.Parse(Tb_Water_Count.Text);
+            WoodCount = GetDefaultValue(Tb_Wood_Count.Text);
+            FireCount = GetDefaultValue(Tb_Fire_Count.Text);
+            DustCount = GetDefaultValue(Tb_Dust_Count.Text);
+            GoldCount = GetDefaultValue(Tb_Gold_Count.Text);
+            WaterCount = GetDefaultValue(Tb_Water_Count.Text);
 
             // 五屬性剩餘數量
-            WoodTransCount = int.Parse(Tb_Wood_Trans_Count.Text);
-            FireTransCount = int.Parse(Tb_Fire_Trans_Count.Text);
-            DustTransCount = int.Parse(Tb_Dust_Trans_Count.Text);
-            GoldTransCount = int.Parse(Tb_Gold_Trans_Count.Text);
-            WaterTransCount = int.Parse(Tb_Water_Trans_Count.Text);
+            WoodTransCount = GetDefaultValue(Tb_Wood_Trans_Count.Text);
+            FireTransCount = GetDefaultValue(Tb_Fire_Trans_Count.Text);
+            DustTransCount = GetDefaultValue(Tb_Dust_Trans_Count.Text);
+            GoldTransCount = GetDefaultValue(Tb_Gold_Trans_Count.Text);
+            WaterTransCount = GetDefaultValue(Tb_Water_Trans_Count.Text);
 
             WoodStrageCount = WoodCount - WoodTransCount;
             FireStrageCount = FireCount - FireTransCount;
@@ -435,10 +437,10 @@ namespace WaDone
             WaterStrageCount = WaterCount - WaterTransCount;
 
             //路徑數量
-            PathCount = int.Parse(Tb_Path_Count.Text) - 2;
-            TransCount = int.Parse(Tb_Trans_Count.Text);
+            PathCount = GetDefaultValue(Tb_Path_Count.Text) - 2;
+            TransCount = GetDefaultValue(Tb_Trans_Count.Text);
 
-            Total_Properity_Lenth = int.Parse(Tb_Len_Count.Text);
+            Total_Properity_Lenth = GetDefaultValue(Tb_Len_Count.Text);
 
             // 轉換
             NameToInt = Enum.GetNames(typeof(EProperity))
@@ -458,19 +460,19 @@ namespace WaDone
             Total_Properity = (EProperity)NameToInt[Cb_Len_Properity.Text];
 
             // 能量
-            StartEnergy = int.Parse(Tb_Start_Energy.Text);
-            EndEnergy = int.Parse(Tb_End_Energy.Text);
+            StartEnergy = GetDefaultValue(Tb_Start_Energy.Text);
+            EndEnergy = GetDefaultValue(Tb_End_Energy.Text);
 
             // 終迄2點
-            Start_X = int.Parse(Tb_Start_x.Text) - 1;
-            Start_Y = int.Parse(Tb_Start_y.Text) - 1;
-            Start1_X = int.Parse(Tb_Start1_x.Text) - 1;
-            Start1_Y = int.Parse(Tb_Start1_y.Text) - 1;
+            Start_X = GetDefaultValue(Tb_Start_x.Text) - 1;
+            Start_Y = GetDefaultValue(Tb_Start_y.Text) - 1;
+            Start1_X = GetDefaultValue(Tb_Start1_x.Text) - 1;
+            Start1_Y = GetDefaultValue(Tb_Start1_y.Text) - 1;
 
-            End_X = int.Parse(Tb_End_x.Text) - 1;
-            End_Y = int.Parse(Tb_End_y.Text) - 1;
-            End1_X = int.Parse(Tb_End1_x.Text) - 1;
-            End1_Y = int.Parse(Tb_End1_y.Text) - 1;
+            End_X = GetDefaultValue(Tb_End_x.Text) - 1;
+            End_Y = GetDefaultValue(Tb_End_y.Text) - 1;
+            End1_X = GetDefaultValue(Tb_End1_x.Text) - 1;
+            End1_Y = GetDefaultValue(Tb_End1_y.Text) - 1;
         }
 
         private void GetStartEnd()
@@ -891,5 +893,6 @@ namespace WaDone
             };
             Tb_Water_Count.Text = (23 - source.Sum()).ToString();
         }
+        private int GetDefaultValue(string source) => int.TryParse(source, out int value) ? value : value;
     }
 }
