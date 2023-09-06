@@ -121,7 +121,8 @@ namespace WaDone
             {
                 if (Result.Any())
                 {
-                    Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity });
+                    int diffPathCount = PathCount + 1;
+                    Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity }, diffPathCount);
 
                     if (HasAnswer)
                     {
@@ -162,11 +163,33 @@ namespace WaDone
             }
         }
 
-        private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startPro"></param>
+        /// <param name="startEng"></param>
+        /// <param name="wood"></param>
+        /// <param name="fire"></param>
+        /// <param name="dust"></param>
+        /// <param name="gold"></param>
+        /// <param name="water"></param>
+        /// <param name="path"></param>
+        /// <param name="process"></param>
+        /// <param name="diffPathCount">還有幾步路到終點</param>
+        private void Go(int startPro, int startEng, int wood, int fire, int dust, int gold, int water, int path, List<EProperity> process, int diffPathCount)
         {
+            diffPathCount--;
             path++;
             EProperity start = (EProperity)startPro;
-            if (path < PathCount + 1 && !HasAnswer)
+
+            int diffProperityPower =  EndProperity -startPro ;
+            if (diffProperityPower < 0)
+            { diffProperityPower += Length; }
+
+            int diffEnergy = Math.Abs(startEng - EndEnergy);
+            int totalDiffPower = diffProperityPower + diffEnergy;
+
+            if (path < PathCount + 1 && !HasAnswer && (totalDiffPower<=diffPathCount))
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -343,7 +366,7 @@ namespace WaDone
                         if (tempStartEng != 0 && tempStartEng != 4)
                         {
                             tempProcess.Add(encome);
-                            Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess);
+                            Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess,diffPathCount);
                         }
                     }
                 }
@@ -893,6 +916,7 @@ namespace WaDone
             };
             Tb_Water_Count.Text = (23 - source.Sum()).ToString();
         }
+
         private int GetDefaultValue(string source) => int.TryParse(source, out int value) ? value : value;
     }
 }
