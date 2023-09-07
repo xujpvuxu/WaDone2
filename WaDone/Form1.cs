@@ -164,7 +164,7 @@ namespace WaDone
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="startPro"></param>
         /// <param name="startEng"></param>
@@ -182,14 +182,14 @@ namespace WaDone
             path++;
             EProperity start = (EProperity)startPro;
 
-            int diffProperityPower =  EndProperity -startPro ;
+            int diffProperityPower = EndProperity - startPro;
             if (diffProperityPower < 0)
             { diffProperityPower += Length; }
 
             int diffEnergy = Math.Abs(startEng - EndEnergy);
             int totalDiffPower = diffProperityPower + diffEnergy;
 
-            if (path < PathCount + 1 && !HasAnswer && (totalDiffPower<=diffPathCount))
+            if (path < PathCount + 1 && !HasAnswer && (totalDiffPower <= diffPathCount))
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -366,7 +366,7 @@ namespace WaDone
                         if (tempStartEng != 0 && tempStartEng != 4)
                         {
                             tempProcess.Add(encome);
-                            Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess,diffPathCount);
+                            Go(tempStartPro, tempStartEng, tempWood, tempFire, tempDust, tempGold, tempWood, path, tempProcess, diffPathCount);
                         }
                     }
                 }
@@ -918,5 +918,26 @@ namespace WaDone
         }
 
         private int GetDefaultValue(string source) => int.TryParse(source, out int value) ? value : value;
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            Tb_Wood_Count.Text = string.Empty;
+            Tb_Wood_Trans_Count.Text = string.Empty;
+
+            Tb_Fire_Count.Text = string.Empty;
+            Tb_Fire_Trans_Count.Text = string.Empty;
+
+            Tb_Water_Count.Text = string.Empty;
+            Tb_Water_Trans_Count.Text = string.Empty;
+
+            Tb_Gold_Count.Text = string.Empty;
+            Tb_Gold_Trans_Count.Text = string.Empty;
+
+            Tb_Dust_Count.Text = string.Empty;
+            Tb_Dust_Trans_Count.Text = string.Empty;
+            
+            Tb_Len_Count.Text = string.Empty;
+            Tb_Trans_Count.Text = string.Empty;
+        }
     }
 }

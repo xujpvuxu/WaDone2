@@ -108,6 +108,7 @@
             this.button29 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button31 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -853,11 +854,22 @@
             this.label1.Size = new System.Drawing.Size(0, 18);
             this.label1.TabIndex = 94;
             // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(261, 309);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(168, 36);
+            this.button31.TabIndex = 95;
+            this.button31.Text = "重置屬性";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
             // Cb_Trans_Count
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 764);
+            this.Controls.Add(this.button31);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
@@ -1028,6 +1040,7 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button31;
     }
 }
 
