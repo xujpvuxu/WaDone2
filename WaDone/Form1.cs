@@ -86,7 +86,7 @@ namespace WaDone
         private int End1_Y = 0;
 
         // 設定
-        private int Length = 5;
+        private static int Length = 5;
 
         private int[,] Maze = null;
         private Dictionary<(int, int), int> PathRecord = new Dictionary<(int, int), int>();
@@ -101,9 +101,9 @@ namespace WaDone
         private List<int> ResultPath = new List<int>();
         private List<int> ResultTransPath = new List<int>();
 
-        private Dictionary<int, (int x, int y)> ParseCoor = Enumerable.Range(0, 5).SelectMany(x => Enumerable.Range(0, 5), (x, y) => (x, y))
+        private Dictionary<int, (int x, int y)> ParseCoor = Enumerable.Range(0, Length).SelectMany(x => Enumerable.Range(0, Length), (x, y) => (x, y))
                                                                  .ToDictionary(
-                                                                       index => (index.x + 1) + (5 * index.y),
+                                                                       index => (index.x + 1) + (Length * index.y),
                                                                        coordinate => (coordinate.x, coordinate.y));
 
         private void Btn_Start_Click(object sender, EventArgs e)
@@ -112,8 +112,8 @@ namespace WaDone
             GetStartEnd();
 
             ResultTable = new DataTable();
-            Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
-            Enumerable.Range(1, 5).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
+            Enumerable.Range(1, Length).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
+            Enumerable.Range(1, Length).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
             dataGridView1.DataSource = ResultTable;
             dataGridView1.ClearSelection();
 
@@ -121,15 +121,28 @@ namespace WaDone
             {
                 if (Result.Any())
                 {
-                    int diffPathCount = PathCount + 1;
-                    Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity }, diffPathCount);
-
-                    if (HasAnswer)
+                    bool isLoop = true;
+                    while (isLoop && PathCount <= Math.Pow(Length, 2) - 2)
                     {
-                        dataGridView1.DataSource = ResultTable;
-                        TransAnswer();
-                        dataGridView1.ClearSelection();
+                        Tb_Path_Count.Text = PathCount.ToString();
+
+                        int diffPathCount = PathCount + 1;
+                        Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity }, diffPathCount);
+
+                        if (HasAnswer)
+                        {
+                            dataGridView1.DataSource = ResultTable;
+                            TransAnswer();
+                            dataGridView1.ClearSelection();
+                        }
+
+                        if (HasAnswer || !CB_NeedResult.Checked)
+                        {
+                            isLoop = false;
+                        }
+                        PathCount = PathCount + 2;
                     }
+                    Tb_Path_Count.Text = PathCount.ToString();
                 }
                 else
                 {
@@ -521,7 +534,7 @@ namespace WaDone
             // 判斷轉彎數
             int totalTransCount = WoodTransCount + FireTransCount + DustTransCount + GoldTransCount + WaterTransCount;
             Result = Result.Where(x => x.Item2.Count <= totalTransCount).ToList();
-            if (PathCount == 25)
+            if (PathCount == Math.Pow(Length,2))
             {
                 if (startRotate == EndRotate)
                 {
@@ -907,14 +920,21 @@ namespace WaDone
 
         private void Tb_Gold_Trans_Count_TextChanged(object sender, EventArgs e)
         {
-            List<int> source = new List<int>
+            try
             {
-                int.Parse(Tb_Wood_Count.Text),
-                int.Parse(Tb_Fire_Count.Text),
-                int.Parse(Tb_Gold_Count.Text),
-                int.Parse(Tb_Dust_Count.Text),
-            };
-            Tb_Water_Count.Text = (23 - source.Sum()).ToString();
+                List<int> source = new List<int>
+                {
+                    int.Parse(Tb_Wood_Count.Text),
+                    int.Parse(Tb_Fire_Count.Text),
+                    int.Parse(Tb_Gold_Count.Text),
+                    int.Parse(Tb_Dust_Count.Text),
+                };
+                Tb_Water_Count.Text = (Math.Pow(Length, 2) - 2 - source.Sum()).ToString();
+            }
+            catch
+            {
+                Tb_Water_Count.Text = string.Empty;
+            }
         }
 
         private int GetDefaultValue(string source) => int.TryParse(source, out int value) ? value : value;
@@ -935,7 +955,7 @@ namespace WaDone
 
             Tb_Dust_Count.Text = string.Empty;
             Tb_Dust_Trans_Count.Text = string.Empty;
-            
+
             Tb_Len_Count.Text = string.Empty;
             Tb_Trans_Count.Text = string.Empty;
         }

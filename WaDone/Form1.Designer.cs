@@ -109,6 +109,7 @@
             this.button30 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button31 = new System.Windows.Forms.Button();
+            this.CB_NeedResult = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -137,7 +138,7 @@
             // 
             // Btn_Start
             // 
-            this.Btn_Start.Location = new System.Drawing.Point(647, 402);
+            this.Btn_Start.Location = new System.Drawing.Point(707, 431);
             this.Btn_Start.Name = "Btn_Start";
             this.Btn_Start.Size = new System.Drawing.Size(99, 44);
             this.Btn_Start.TabIndex = 2;
@@ -849,7 +850,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(312, 339);
+            this.label1.Location = new System.Drawing.Point(288, 370);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 18);
             this.label1.TabIndex = 94;
@@ -864,11 +865,24 @@
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
+            // CB_NeedResult
+            // 
+            this.CB_NeedResult.AutoSize = true;
+            this.CB_NeedResult.Checked = true;
+            this.CB_NeedResult.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CB_NeedResult.Location = new System.Drawing.Point(696, 403);
+            this.CB_NeedResult.Name = "CB_NeedResult";
+            this.CB_NeedResult.Size = new System.Drawing.Size(142, 22);
+            this.CB_NeedResult.TabIndex = 96;
+            this.CB_NeedResult.Text = "我一定要找到";
+            this.CB_NeedResult.UseVisualStyleBackColor = true;
+            // 
             // Cb_Trans_Count
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 764);
+            this.Controls.Add(this.CB_NeedResult);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button30);
@@ -1041,6 +1055,7 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.CheckBox CB_NeedResult;
     }
 }
 
