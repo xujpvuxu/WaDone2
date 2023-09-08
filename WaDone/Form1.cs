@@ -132,13 +132,12 @@ namespace WaDone
                             TransAnswer();
                             dataGridView1.ClearSelection();
                         }
-
-                        if (HasAnswer || !CB_NeedResult.Checked)
-                        {
-                            isLoop = false;
-                        }
-                        PathCount = PathCount + 2;
                     }
+                    if (HasAnswer || !CB_NeedResult.Checked)
+                    {
+                        isLoop = false;
+                    }
+                    PathCount = PathCount + 2;
                     Tb_Path_Count.Text = PathCount.ToString();
                 }
                 if (!HasAnswer)
