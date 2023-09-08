@@ -109,8 +109,6 @@ namespace WaDone
         private void Btn_Start_Click(object sender, EventArgs e)
         {
             Init();
-            GetStartEnd();
-
             ResultTable = new DataTable();
             Enumerable.Range(1, Length).ToList().ForEach(x => ResultTable.Columns.Add(x.ToString()));
             Enumerable.Range(1, Length).ToList().ForEach(x => ResultTable.Rows.Add(ResultTable.NewRow()));
@@ -119,13 +117,12 @@ namespace WaDone
 
             if (string.IsNullOrEmpty(ErrorMessage))
             {
-                if (Result.Any())
+                bool isLoop = true;
+                while (isLoop && PathCount <= Math.Pow(Length, 2) - 2)
                 {
-                    bool isLoop = true;
-                    while (isLoop && PathCount <= Math.Pow(Length, 2) - 2)
+                    GetStartEnd();
+                    if (Result.Any())
                     {
-                        Tb_Path_Count.Text = PathCount.ToString();
-
                         int diffPathCount = PathCount + 1;
                         Go(StartProperity, StartEnergy, 0, 0, 0, 0, 0, 0, new List<EProperity> { (EProperity)StartProperity }, diffPathCount);
 
@@ -144,7 +141,7 @@ namespace WaDone
                     }
                     Tb_Path_Count.Text = PathCount.ToString();
                 }
-                else
+                if (!HasAnswer)
                 {
                     ErrorMessage = "無解答";
                 }
@@ -405,6 +402,7 @@ namespace WaDone
                         }
                     }
 
+                    // 轉屬幾次
                     if (TransCount == 0)
                     {
                         isAllMatch[1] = true;
@@ -534,7 +532,7 @@ namespace WaDone
             // 判斷轉彎數
             int totalTransCount = WoodTransCount + FireTransCount + DustTransCount + GoldTransCount + WaterTransCount;
             Result = Result.Where(x => x.Item2.Count <= totalTransCount).ToList();
-            if (PathCount == Math.Pow(Length,2))
+            if (PathCount == Math.Pow(Length, 2))
             {
                 if (startRotate == EndRotate)
                 {
