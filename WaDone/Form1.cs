@@ -899,7 +899,7 @@ namespace WaDone
 
         private void GetStartProperity(object sender)
         {
-            System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
+            Button btn = (Button)sender;
             string text = btn.Text;
             switch (CurrentProperity)
             {
@@ -927,6 +927,7 @@ namespace WaDone
                     int.Parse(Tb_Dust_Count.Text),
                 };
                 Tb_Water_Count.Text = (Math.Pow(Length, 2) - 2 - source.Sum()).ToString();
+                Tb_Water_Trans_Count.Focus();
             }
             catch
             {
@@ -938,6 +939,9 @@ namespace WaDone
 
         private void button31_Click(object sender, EventArgs e)
         {
+            Tb_Start_Energy.Text = string.Empty;
+            Tb_End_Energy.Text = string.Empty;
+           
             Tb_Wood_Count.Text = string.Empty;
             Tb_Wood_Trans_Count.Text = string.Empty;
 
@@ -956,5 +960,23 @@ namespace WaDone
             Tb_Len_Count.Text = string.Empty;
             Tb_Trans_Count.Text = string.Empty;
         }
+
+        private void Tb_Start_Energy_TextChanged(object sender, EventArgs e)=> Tb_End_Energy.Focus();
+        private void Tb_End_Energy_TextChanged(object sender, EventArgs e)=> Tb_Wood_Count.Focus();
+
+        private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => Tb_Wood_Trans_Count.Focus();
+
+        private void Tb_Wood_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Fire_Count.Focus();
+
+        private void Tb_Fire_Count_TextChanged(object sender, EventArgs e) => Tb_Fire_Trans_Count.Focus();
+
+        private void Tb_Fire_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Dust_Count.Focus();
+
+        private void Tb_Dust_Count_TextChanged(object sender, EventArgs e) => Tb_Dust_Trans_Count.Focus();
+
+        private void Tb_Dust_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Gold_Count.Focus();
+
+        private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => Tb_Gold_Trans_Count.Focus();
+
     }
 }

@@ -119,7 +119,7 @@
             this.Tb_Start_Energy.Name = "Tb_Start_Energy";
             this.Tb_Start_Energy.Size = new System.Drawing.Size(47, 29);
             this.Tb_Start_Energy.TabIndex = 0;
-            this.Tb_Start_Energy.Text = "1";
+            this.Tb_Start_Energy.TextChanged += new System.EventHandler(this.Tb_Start_Energy_TextChanged);
             // 
             // Cb_Start_Properity
             // 
@@ -167,7 +167,7 @@
             this.Tb_End_Energy.Name = "Tb_End_Energy";
             this.Tb_End_Energy.Size = new System.Drawing.Size(47, 29);
             this.Tb_End_Energy.TabIndex = 3;
-            this.Tb_End_Energy.Text = "1";
+            this.Tb_End_Energy.TextChanged += new System.EventHandler(this.Tb_End_Energy_TextChanged);
             // 
             // Tb_Wood_Count
             // 
@@ -175,6 +175,7 @@
             this.Tb_Wood_Count.Name = "Tb_Wood_Count";
             this.Tb_Wood_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Wood_Count.TabIndex = 5;
+            this.Tb_Wood_Count.TextChanged += new System.EventHandler(this.Tb_Wood_Count_TextChanged);
             // 
             // Tb_Gold_Count
             // 
@@ -182,6 +183,7 @@
             this.Tb_Gold_Count.Name = "Tb_Gold_Count";
             this.Tb_Gold_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Gold_Count.TabIndex = 6;
+            this.Tb_Gold_Count.TextChanged += new System.EventHandler(this.Tb_Gold_Count_TextChanged);
             // 
             // Tb_Water_Count
             // 
@@ -196,6 +198,7 @@
             this.Tb_Dust_Count.Name = "Tb_Dust_Count";
             this.Tb_Dust_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Dust_Count.TabIndex = 8;
+            this.Tb_Dust_Count.TextChanged += new System.EventHandler(this.Tb_Dust_Count_TextChanged);
             // 
             // Tb_Fire_Count
             // 
@@ -203,6 +206,7 @@
             this.Tb_Fire_Count.Name = "Tb_Fire_Count";
             this.Tb_Fire_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Fire_Count.TabIndex = 9;
+            this.Tb_Fire_Count.TextChanged += new System.EventHandler(this.Tb_Fire_Count_TextChanged);
             // 
             // Tb_Path_Count
             // 
@@ -457,6 +461,7 @@
             this.Tb_Fire_Trans_Count.Name = "Tb_Fire_Trans_Count";
             this.Tb_Fire_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Fire_Trans_Count.TabIndex = 54;
+            this.Tb_Fire_Trans_Count.TextChanged += new System.EventHandler(this.Tb_Fire_Trans_Count_TextChanged);
             // 
             // Tb_Dust_Trans_Count
             // 
@@ -464,6 +469,7 @@
             this.Tb_Dust_Trans_Count.Name = "Tb_Dust_Trans_Count";
             this.Tb_Dust_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Dust_Trans_Count.TabIndex = 53;
+            this.Tb_Dust_Trans_Count.TextChanged += new System.EventHandler(this.Tb_Dust_Trans_Count_TextChanged);
             // 
             // Tb_Water_Trans_Count
             // 
@@ -486,6 +492,7 @@
             this.Tb_Wood_Trans_Count.Name = "Tb_Wood_Trans_Count";
             this.Tb_Wood_Trans_Count.Size = new System.Drawing.Size(39, 29);
             this.Tb_Wood_Trans_Count.TabIndex = 50;
+            this.Tb_Wood_Trans_Count.TextChanged += new System.EventHandler(this.Tb_Wood_Trans_Count_TextChanged);
             // 
             // label22
             // 
