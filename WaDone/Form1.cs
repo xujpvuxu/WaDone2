@@ -481,7 +481,7 @@ namespace WaDone
 
             if (PathCount % 2 != PathLimit % 2)
             {
-                ErrorMessage = "請保持一樣的奇偶數";
+                PathCount++;
             }
 
             Total_Properity_Lenth = GetDefaultValue(Tb_Len_Count.Text);
@@ -969,6 +969,9 @@ namespace WaDone
 
             Tb_Dust_Count.Text = string.Empty;
             Tb_Dust_Trans_Count.Text = string.Empty;
+
+            Tb_Len_Count.Text = string.Empty;
+            Tb_Trans_Count.Text = string.Empty;
 
             Tb_Len_Count.Text = string.Empty;
             Tb_Trans_Count.Text = string.Empty;

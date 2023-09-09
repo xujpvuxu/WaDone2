@@ -393,6 +393,7 @@
             // 
             // Tb_Start_x
             // 
+            this.Tb_Start_x.Enabled = false;
             this.Tb_Start_x.Location = new System.Drawing.Point(552, 316);
             this.Tb_Start_x.Name = "Tb_Start_x";
             this.Tb_Start_x.Size = new System.Drawing.Size(47, 29);
@@ -401,6 +402,7 @@
             // 
             // Tb_Start_y
             // 
+            this.Tb_Start_y.Enabled = false;
             this.Tb_Start_y.Location = new System.Drawing.Point(633, 316);
             this.Tb_Start_y.Name = "Tb_Start_y";
             this.Tb_Start_y.Size = new System.Drawing.Size(47, 29);
@@ -409,6 +411,7 @@
             // 
             // Tb_Start1_y
             // 
+            this.Tb_Start1_y.Enabled = false;
             this.Tb_Start1_y.Location = new System.Drawing.Point(633, 359);
             this.Tb_Start1_y.Name = "Tb_Start1_y";
             this.Tb_Start1_y.Size = new System.Drawing.Size(47, 29);
@@ -417,6 +420,7 @@
             // 
             // Tb_Start1_x
             // 
+            this.Tb_Start1_x.Enabled = false;
             this.Tb_Start1_x.Location = new System.Drawing.Point(552, 359);
             this.Tb_Start1_x.Name = "Tb_Start1_x";
             this.Tb_Start1_x.Size = new System.Drawing.Size(47, 29);
@@ -425,6 +429,7 @@
             // 
             // Tb_End1_y
             // 
+            this.Tb_End1_y.Enabled = false;
             this.Tb_End1_y.Location = new System.Drawing.Point(855, 359);
             this.Tb_End1_y.Name = "Tb_End1_y";
             this.Tb_End1_y.Size = new System.Drawing.Size(47, 29);
@@ -433,6 +438,7 @@
             // 
             // Tb_End1_x
             // 
+            this.Tb_End1_x.Enabled = false;
             this.Tb_End1_x.Location = new System.Drawing.Point(774, 359);
             this.Tb_End1_x.Name = "Tb_End1_x";
             this.Tb_End1_x.Size = new System.Drawing.Size(47, 29);
@@ -441,6 +447,7 @@
             // 
             // Tb_End_y
             // 
+            this.Tb_End_y.Enabled = false;
             this.Tb_End_y.Location = new System.Drawing.Point(855, 316);
             this.Tb_End_y.Name = "Tb_End_y";
             this.Tb_End_y.Size = new System.Drawing.Size(47, 29);
@@ -449,6 +456,7 @@
             // 
             // Tb_End_x
             // 
+            this.Tb_End_x.Enabled = false;
             this.Tb_End_x.Location = new System.Drawing.Point(774, 316);
             this.Tb_End_x.Name = "Tb_End_x";
             this.Tb_End_x.Size = new System.Drawing.Size(47, 29);
