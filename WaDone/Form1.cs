@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -988,12 +989,12 @@ namespace WaDone
             HttpClient client = new HttpClient();
             string checkDate = client.GetStringAsync($"https://xujpvuxu.github.io/WaDone/CheckDate.json").Result;
             CheckDate source = JsonConvert.DeserializeObject<CheckDate>(checkDate);
-            DateTime currentDate = DateTime.Now;
-            bool HasUpdate = source.Date.Equals(currentDate.ToString("yyyyMMdd"));
-            if (HasUpdate)
-            {
-                label1.Text = "今天有更新版唷~";
-            }
+            label1.Text = $"最後更新日期為：{source.Date}";
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Process.Start($"https://xujpvuxu.github.io/WaDone/WaDone.zip");
         }
     }
 }
