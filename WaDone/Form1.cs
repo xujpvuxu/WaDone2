@@ -16,6 +16,7 @@ namespace WaDone
         public Cb_Trans_Count()
         {
             InitializeComponent();
+            CheckDate();
         }
 
         private List<(List<EProperity>, List<int>)> ResultAnswer = new List<(List<EProperity>, List<int>)>();
@@ -942,7 +943,7 @@ namespace WaDone
         {
             Tb_Start_Energy.Text = string.Empty;
             Tb_End_Energy.Text = string.Empty;
-           
+
             Tb_Wood_Count.Text = string.Empty;
             Tb_Wood_Trans_Count.Text = string.Empty;
 
@@ -962,8 +963,9 @@ namespace WaDone
             Tb_Trans_Count.Text = string.Empty;
         }
 
-        private void Tb_Start_Energy_TextChanged(object sender, EventArgs e)=> Tb_End_Energy.Focus();
-        private void Tb_End_Energy_TextChanged(object sender, EventArgs e)=> Tb_Wood_Count.Focus();
+        private void Tb_Start_Energy_TextChanged(object sender, EventArgs e) => Tb_End_Energy.Focus();
+
+        private void Tb_End_Energy_TextChanged(object sender, EventArgs e) => Tb_Wood_Count.Focus();
 
         private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => Tb_Wood_Trans_Count.Focus();
 
@@ -979,5 +981,9 @@ namespace WaDone
 
         private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => Tb_Gold_Trans_Count.Focus();
 
+        private void CheckDate()
+        {
+            H
+        }
     }
 }
