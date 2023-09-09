@@ -110,6 +110,8 @@ namespace WaDone
                                                                        index => (index.x + 1) + (Length * index.y),
                                                                        coordinate => (coordinate.x, coordinate.y));
 
+        private int PathLimit = 0;
+
         private void Btn_Start_Click(object sender, EventArgs e)
         {
             Init();
@@ -477,6 +479,11 @@ namespace WaDone
             PathCount = GetDefaultValue(Tb_Path_Count.Text) - 2;
             TransCount = GetDefaultValue(Tb_Trans_Count.Text);
 
+            if (PathCount % 2 != PathLimit % 2)
+            {
+                ErrorMessage = "請保持一樣的奇偶數";
+            }
+
             Total_Properity_Lenth = GetDefaultValue(Tb_Len_Count.Text);
 
             // 轉換
@@ -774,7 +781,7 @@ namespace WaDone
 
         private void SetPoint(object sender)
         {
-            System.Windows.Forms.Button btn = (System.Windows.Forms.Button)sender;
+            Button btn = (Button)sender;
             string[] xy = btn.Text.Split(',');
             switch (CurrentPoint)
             {
@@ -802,7 +809,8 @@ namespace WaDone
 
                     int diffX = Math.Abs(int.Parse(Tb_End1_x.Text) - int.Parse(Tb_Start1_x.Text));
                     int diffY = Math.Abs(int.Parse(Tb_End1_y.Text) - int.Parse(Tb_Start1_y.Text));
-                    Tb_Path_Count.Text = (diffY + diffX + 3).ToString();
+                    PathLimit = diffY + diffX + 3;
+                    Tb_Path_Count.Text = PathLimit.ToString();
                     CurrentPoint = 0;
                     break;
 
