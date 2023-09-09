@@ -911,6 +911,7 @@ namespace WaDone
                 case 1:
                     Cb_End_Properity.Text = text;
                     CurrentProperity = 0;
+                    Tb_Start_Energy.Focus();
                     break;
             }
         }
