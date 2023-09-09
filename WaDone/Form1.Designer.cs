@@ -972,7 +972,6 @@
             this.Controls.Add(this.Cb_Start_Properity);
             this.Controls.Add(this.Tb_Start_Energy);
             this.Name = "Cb_Trans_Count";
-            this.Text = "萌鼠聚集地";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

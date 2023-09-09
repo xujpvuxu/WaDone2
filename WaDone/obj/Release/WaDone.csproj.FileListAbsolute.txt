@@ -53,3 +53,6 @@ D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.GenerateResource.cache
 D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.CoreCompileInputs.cache
 D:\TFS\WaDone2\WaDone\obj\Release\WaDone.exe
 D:\TFS\WaDone2\WaDone\obj\Release\WaDone.pdb
+D:\TFS\WaDone2\WaDone\bin\Release\Newtonsoft.Json.dll
+D:\TFS\WaDone2\WaDone\bin\Release\Newtonsoft.Json.xml
+D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.CopyComplete

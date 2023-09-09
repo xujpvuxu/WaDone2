@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -983,7 +985,15 @@ namespace WaDone
 
         private void CheckDate()
         {
-            H
+            HttpClient client = new HttpClient();
+            string checkDate = client.GetStringAsync($"https://xujpvuxu.github.io/WaDone/CheckDate.json").Result;
+            CheckDate source = JsonConvert.DeserializeObject<CheckDate>(checkDate);
+            DateTime currentDate = DateTime.Now;
+            bool HasUpdate = source.Date.Equals(currentDate.ToString("yyyyMMdd"));
+            if (HasUpdate)
+            {
+                label1.Text = "今天有更新版唷~";
+            }
         }
     }
 }
