@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using DriveSerialNumber;
 
 namespace WaDone
 {
@@ -19,6 +20,7 @@ namespace WaDone
         public Cb_Trans_Count()
         {
             InitializeComponent();
+            CheckValid();
             CheckDate();
         }
 
@@ -1006,6 +1008,27 @@ namespace WaDone
         private void label1_Click(object sender, EventArgs e)
         {
             Process.Start($"https://xujpvuxu.github.io/WaDone/WaDone.zip");
+        }
+
+        private void CheckValid()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                string valids = client.GetStringAsync($"https://xujpvuxu.github.io/WaDone/Valid.json").Result;
+                List<ValidObject> source = JsonConvert.DeserializeObject<List<ValidObject>>(valids);
+
+                string serialNumber = new Drive().SerialNumber();
+                string encode = new EnCodeRSA().AesEncrypt(serialNumber);
+                if (!source.Any(x => x.Value.Equals(encode)))
+                {
+                    Environment.Exit(0);
+                }
+            }
+            catch
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }

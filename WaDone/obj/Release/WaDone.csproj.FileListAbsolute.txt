@@ -56,3 +56,5 @@ D:\TFS\WaDone2\WaDone\obj\Release\WaDone.pdb
 D:\TFS\WaDone2\WaDone\bin\Release\Newtonsoft.Json.dll
 D:\TFS\WaDone2\WaDone\bin\Release\Newtonsoft.Json.xml
 D:\TFS\WaDone2\WaDone\obj\Release\WaDone.csproj.CopyComplete
+D:\TFS\WaDone2\WaDone\bin\Release\DriveSerialNumber.dll
+D:\TFS\WaDone2\WaDone\bin\Release\DriveSerialNumber.pdb
