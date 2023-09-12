@@ -123,6 +123,7 @@
             // 
             // Cb_Start_Properity
             // 
+            this.Cb_Start_Properity.Enabled = false;
             this.Cb_Start_Properity.FormattingEnabled = true;
             this.Cb_Start_Properity.Items.AddRange(new object[] {
             "木",
@@ -148,6 +149,7 @@
             // 
             // Cb_End_Properity
             // 
+            this.Cb_End_Properity.Enabled = false;
             this.Cb_End_Properity.FormattingEnabled = true;
             this.Cb_End_Properity.Items.AddRange(new object[] {
             "木",
