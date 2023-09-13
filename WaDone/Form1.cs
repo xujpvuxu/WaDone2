@@ -1016,11 +1016,21 @@ namespace WaDone
             {
                 HttpClient client = new HttpClient();
                 string valids = client.GetStringAsync($"https://xujpvuxu.github.io/WaDone/Valid.json").Result;
-                List<ValidObject> source = JsonConvert.DeserializeObject<List<ValidObject>>(valids);
+                List<string> validDriveSerial = JsonConvert.DeserializeObject<List<ValidObject>>(valids).Select(x=>x.Value).Distinct().ToList();
 
-                string serialNumber = new Drive().SerialNumber();
-                string encode = new EnCodeRSA().AesEncrypt(serialNumber);
-                if (!source.Any(x => x.Value.Equals(encode)))
+                List<string> serialNumber = new Drive().SerialNumber();
+                EnCodeRSA encodeHelper = new EnCodeRSA();
+                bool hasValid = false;
+                foreach (string drive in serialNumber )
+                {
+                    if (validDriveSerial.Contains( encodeHelper.AesEncrypt(drive)))
+                    {
+                        hasValid = true;
+                        break;
+                    }
+
+                }
+                if (!hasValid)
                 {
                     Environment.Exit(0);
                 }
