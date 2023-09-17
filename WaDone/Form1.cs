@@ -972,6 +972,7 @@ namespace WaDone
             Tb_Dust_Count.Text = string.Empty;
             Tb_Dust_Trans_Count.Text = string.Empty;
 
+            TextBox er = Tb_Dust_Trans_Count;
             Tb_Len_Count.Text = string.Empty;
             Tb_Trans_Count.Text = string.Empty;
 
@@ -979,23 +980,31 @@ namespace WaDone
             Tb_Trans_Count.Text = string.Empty;
         }
 
-        private void Tb_Start_Energy_TextChanged(object sender, EventArgs e) => Tb_End_Energy.Focus();
+        private void Tb_Start_Energy_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Start_Energy, Tb_End_Energy);
 
-        private void Tb_End_Energy_TextChanged(object sender, EventArgs e) => Tb_Wood_Count.Focus();
+        private void Tb_End_Energy_TextChanged(object sender, EventArgs e) => TbChenge(Tb_End_Energy,Tb_Wood_Count);
 
-        private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => Tb_Wood_Trans_Count.Focus();
+        private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Count,Tb_Wood_Trans_Count);
 
-        private void Tb_Wood_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Fire_Count.Focus();
+        private void Tb_Wood_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Trans_Count,Tb_Fire_Count);
 
-        private void Tb_Fire_Count_TextChanged(object sender, EventArgs e) => Tb_Fire_Trans_Count.Focus();
+        private void Tb_Fire_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Count,Tb_Fire_Trans_Count);
 
-        private void Tb_Fire_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Dust_Count.Focus();
+        private void Tb_Fire_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Trans_Count,Tb_Dust_Count);
 
-        private void Tb_Dust_Count_TextChanged(object sender, EventArgs e) => Tb_Dust_Trans_Count.Focus();
+        private void Tb_Dust_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Count,Tb_Dust_Trans_Count);
 
-        private void Tb_Dust_Trans_Count_TextChanged(object sender, EventArgs e) => Tb_Gold_Count.Focus();
+        private void Tb_Dust_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Trans_Count,Tb_Gold_Count);
 
-        private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => Tb_Gold_Trans_Count.Focus();
+        private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Gold_Count,Tb_Gold_Trans_Count);
+
+        private void TbChenge(TextBox sourceTextBox, TextBox targetTextBox)
+        {
+            if (!string.IsNullOrEmpty(sourceTextBox.Text))
+            {
+                targetTextBox.Focus();
+            }
+        }
 
         private void CheckDate()
         {
@@ -1016,19 +1025,18 @@ namespace WaDone
             {
                 HttpClient client = new HttpClient();
                 string valids = client.GetStringAsync($"https://xujpvuxu.github.io/WaDone/Valid.json").Result;
-                List<string> validDriveSerial = JsonConvert.DeserializeObject<List<ValidObject>>(valids).Select(x=>x.Value).Distinct().ToList();
+                List<string> validDriveSerial = JsonConvert.DeserializeObject<List<ValidObject>>(valids).Select(x => x.Value).Distinct().ToList();
 
                 List<string> serialNumber = new Drive().SerialNumber();
                 EnCodeRSA encodeHelper = new EnCodeRSA();
                 bool hasValid = false;
-                foreach (string drive in serialNumber )
+                foreach (string drive in serialNumber)
                 {
-                    if (validDriveSerial.Contains( encodeHelper.AesEncrypt(drive)))
+                    if (validDriveSerial.Contains(encodeHelper.AesEncrypt(drive)))
                     {
                         hasValid = true;
                         break;
                     }
-
                 }
                 if (!hasValid)
                 {
