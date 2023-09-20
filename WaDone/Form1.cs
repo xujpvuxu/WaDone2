@@ -946,7 +946,7 @@ namespace WaDone
             }
             catch
             {
-                Tb_Water_Count.Text = string.Empty;
+                TbChenge(Tb_Gold_Trans_Count, Tb_Water_Trans_Count);
             }
         }
 
@@ -982,21 +982,21 @@ namespace WaDone
 
         private void Tb_Start_Energy_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Start_Energy, Tb_End_Energy);
 
-        private void Tb_End_Energy_TextChanged(object sender, EventArgs e) => TbChenge(Tb_End_Energy,Tb_Wood_Count);
+        private void Tb_End_Energy_TextChanged(object sender, EventArgs e) => TbChenge(Tb_End_Energy, Tb_Wood_Count);
 
-        private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Count,Tb_Wood_Trans_Count);
+        private void Tb_Wood_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Count, Tb_Wood_Trans_Count);
 
-        private void Tb_Wood_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Trans_Count,Tb_Fire_Count);
+        private void Tb_Wood_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Wood_Trans_Count, Tb_Fire_Count);
 
-        private void Tb_Fire_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Count,Tb_Fire_Trans_Count);
+        private void Tb_Fire_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Count, Tb_Fire_Trans_Count);
 
-        private void Tb_Fire_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Trans_Count,Tb_Dust_Count);
+        private void Tb_Fire_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Fire_Trans_Count, Tb_Dust_Count);
 
-        private void Tb_Dust_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Count,Tb_Dust_Trans_Count);
+        private void Tb_Dust_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Count, Tb_Dust_Trans_Count);
 
-        private void Tb_Dust_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Trans_Count,Tb_Gold_Count);
+        private void Tb_Dust_Trans_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Dust_Trans_Count, Tb_Gold_Count);
 
-        private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Gold_Count,Tb_Gold_Trans_Count);
+        private void Tb_Gold_Count_TextChanged(object sender, EventArgs e) => TbChenge(Tb_Gold_Count, Tb_Gold_Trans_Count);
 
         private void TbChenge(TextBox sourceTextBox, TextBox targetTextBox)
         {
@@ -1040,13 +1040,22 @@ namespace WaDone
                 }
                 if (!hasValid)
                 {
-                    Environment.Exit(0);
+                    GetSerivalNumber();
                 }
             }
             catch
             {
-                Environment.Exit(0);
+                GetSerivalNumber();
             }
+        }
+
+        private void GetSerivalNumber()
+        {
+            string drive =  new Drive().SerialNumber().First();
+            Clipboard.SetDataObject(drive, true);
+            MessageBox.Show("已將註冊碼複製到剪貼簿，請貼給盟鼠教教主");
+            
+            Environment.Exit(0);
         }
     }
 }
