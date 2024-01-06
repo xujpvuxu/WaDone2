@@ -11,7 +11,6 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using DriveSerialNumber;
 
 namespace WaDone
 {
